@@ -1,0 +1,48 @@
+<body>
+    <section class="hero is-info is-small">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <p class="title">
+                    Medical History
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- <div class="box cta">
+      
+      </div> -->
+    <section class="container cta" style="padding:50px">
+        <div class="columns features is-multiline">
+            <div class="column is-4" *ngFor="let item of mService.cards | async">
+                <div class="card is-shady">
+
+                    <div class="card-content">
+                        <div class="content">
+
+                            <article class="notification media has-background-white">
+
+                                <div class="media-content">
+                                    <div class="content">
+                                        <h1 class="title is-size-4">{{item.title}}</h1>
+
+
+                                    </div>
+                                </div>
+                            </article>
+                            <span (click)="openCard(item)" class="button is-link modal-button"
+                                data-target="modal-image2">More</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <!--  ===============
+      HERE BE MODALS
+      ===============  -->
+    <!-- 3dFlipVertical card tiny -->

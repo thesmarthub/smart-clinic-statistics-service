@@ -16,7 +16,7 @@
     </div> -->
   <section class="container cta" style="padding:50px">
     <div class="columns features is-multiline">
-      <div class="column is-4" *ngFor="let item of items">
+      <div class="column is-4" *ngFor="let item of sService.cards | async">
         <div class="card is-shady">
 
           <div class="card-content">
@@ -26,13 +26,14 @@
 
                 <div class="media-content">
                   <div class="content">
-                    <h1 class="title is-size-4">Title</h1>
+                    <h1 class="title is-size-4">{{item.title}}</h1>
 
 
                   </div>
                 </div>
               </article>
-              <span (click)="activateModal()" class="button is-link modal-button" data-target="modal-image2">More</span>
+              <span (click)="activateModal(item)" class="button is-link modal-button"
+                data-target="modal-image2">More</span>
 
 
             </div>
@@ -48,52 +49,38 @@
         <div class="card">
           <header class="card-header">
             <p class="card-header-title">
-              Component
+              {{sService.activeCard?.title}}
             </p>
-
           </header>
-          <div class="card-content">
+
+          <div class="card-content" *ngIf="!sService.activeCard?.loading">
             <div class="content">
+              <div class="columns">
+                <div class="column is-4">
+                  From: <input [(ngModel)]="sService.dateRange.startDate" class="input is-success" type="date" placeholder="Success input">
+                </div>
+                <div class="column is-4">
+                  To: <input [(ngModel)]="sService.dateRange.endDate" class="input is-success" type="date" placeholder="Success input">
+                </div>
+                <div class="column is-4">
+                  Action: <button class="button is-fullwidth" (click)="sService.fetchStats()">Fetch Data</button>
+                </div>
+              </div>
               <table class="table">
                 <thead>
                   <tr>
                     <th class="is-size-4">Title</th>
                     <th class="is-size-4">Value</th>
-                   
+
 
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr>
-                    <th class="has-text-link has-text-weight-bold	is-size-4	">GOPD Male Attendance and female attendance</th>
-                    <td class="has-text-primary	has-text-weight-bold is-size-4	">5000</td>
-                   
-                  </tr>
-                  <tr>
-                    <th class="has-text-link has-text-weight-bold	is-size-4	">male</th>
-                    <td class="has-text-primary	has-text-weight-bold is-size-4	">38</td>
-                   
-                  </tr>
-                  <tr>
-                    <th class="has-text-link has-text-weight-bold	is-size-4	">male</th>
-                    <td class="has-text-primary	has-text-weight-bold is-size-4	">38</td>
-                   
-                  </tr>
-                  <tr>
-                    <th class="has-text-link has-text-weight-bold	is-size-4	">male</th>
-                    <td class="has-text-primary	has-text-weight-bold is-size-4	">38</td>
-                   
-                  </tr>
-                  <tr>
-                    <th class="has-text-link has-text-weight-bold	is-size-4	">male</th>
-                    <td class="has-text-primary	has-text-weight-bold is-size-4	">38</td>
-                   
-                  </tr>
-                  <tr>
-                    <th class="has-text-link has-text-weight-bold	is-size-4	">male</th>
-                    <td class="has-text-primary	has-text-weight-bold is-size-4	">38</td>
-                   
+                  <tr *ngFor="let result of sService.activeCard?.result">
+                    <th class="has-text-link has-text-weight-bold	is-size-4	">{{result.title}}
+                    </th>
+                    <td class="has-text-primary	has-text-weight-bold is-size-4	">{{result.value}}</td>
                   </tr>
 
 

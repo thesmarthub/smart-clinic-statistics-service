@@ -1,0 +1,47 @@
+<div>
+    <header class="card-header">
+        <p class="card-header-title">
+            {{service?.activeCard?.title}}
+        </p>
+    </header>
+
+    <div class="card-content" *ngIf="!service?.activeCard?.loading">
+        <div class="content">
+            <div class="columns">
+                <div class="column is-4">
+                    From: <input [(ngModel)]="service?.dateRange.startDate" class="input is-success" type="date"
+                        placeholder="Success input">
+                </div>
+                <div class="column is-4">
+                    To: <input [(ngModel)]="service?.dateRange.endDate" class="input is-success" type="date"
+                        placeholder="Success input">
+                </div>
+                <div class="column is-4">
+                    Action: <button class="button is-fullwidth" (click)="service?.filterDate()">Fetch
+                        Data</button>
+                </div>
+            </div>
+            <table class="table is-full-width">
+                <thead>
+                    <tr>
+                        <th class="is-size-4" *ngFor="let title of titles">{{title.title}}</th>
+                        <th class="is-size-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let result of displayedData">
+                        <td class="has-text-link has-text-weight-bold is-size-4" *ngFor="let val of titles">
+                            {{result[val.key]}}</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer class="card-footer">
+
+        <a class="card-footer-item" (click)="deactivateModal()">Close</a>
+
+    </footer>
+</div>

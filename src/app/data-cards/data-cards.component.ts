@@ -1,26 +1,37 @@
 import { Component, OnInit } from '@angular/core';
+import { ICard, StatisticsService } from '../statistics.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-data-cards',
   templateUrl: './data-cards.component.html',
-  styleUrls: ['./data-cards.component.css']
+  styleUrls: ['./data-cards.component.css'],
 })
 export class DataCardsComponent implements OnInit {
-
-  constructor() { }
+  constructor(public sService: StatisticsService) {}
 
   ngOnInit(): void {
-  }
-  items = [1, 2, 3, 4, 5]
-
-
-  activateModal() {
-    var element = document.getElementById("modal");
-    element.classList.add("is-active");
+    this.sService.fetchCards();
   }
 
-   deactivateModal() {
-    var element = document.getElementById("modal");
-    element.classList.remove("is-active");
+  openCard(card: ICard) {
+    this.sService.fetchStats(card)
+  }
+
+  activateModal(card, hasData = false) {
+    var element = document.getElementById('modal');
+    element.classList.add('is-active');
+    if (!hasData) {
+      this.sService.fetchStats(card);
+    }
+  }
+
+  fetchStatsInRange() {
+    this.sService.fetchStats(this.sService.activeCard);
+  }
+
+  deactivateModal() {
+    var element = document.getElementById('modal');
+    element.classList.remove('is-active');
   }
 }
