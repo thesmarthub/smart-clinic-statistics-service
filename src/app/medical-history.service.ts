@@ -8,15 +8,23 @@ import { AppService } from './app.service';
 @Injectable({
   providedIn: 'root',
 })
-export class MedicalHistoryService extends AppService {
-  constructor(public _http: HttpClient) {
-    super();
-    this.broadcaster = new BehaviorSubject(null);
-    this.nestLevel = 0;
-  }
+export class MedicalHistoryService {
+  broadcaster = new BehaviorSubject<{ event: AppEvent; data: any }>(null);
+  baseURL = environment.baseURL;
+  cards = new BehaviorSubject<Record<string, any>[]>([]);
+  activeCard;
+  dateRange = {
+    startDate: moment().format('YYYY-MM-DD'),
+    endDate: moment().format('YYYY-MM-DD'),
+  };
+  medicalHistory;
+  config;
+  patient;
 
-  fetchCards(card) {
-    this._http.get(`${this.baseURL}${card.url}`).subscribe(
+  constructor(public _http: HttpClient) {}
+
+  fetchCards() {
+    this._http.get(`${this.baseURL}history-cards`).subscribe(
       (res: IResult) => {
         if (res && Array.isArray(res?.result)) {
           this.cards.next(res.result);
@@ -31,54 +39,31 @@ export class MedicalHistoryService extends AppService {
     );
   }
 
-  fetchStats(card: ICard) {
-    this.activeCard = card;
-    this.activeCard.loading = true;
-    this._http
-      .get(
-        `${this.baseURL}dynamic-stats?action=${card.key ?? ''}&start_date=${
-          this.dateRange.startDate
-        }&end_date=${this.dateRange.endDate}&populate=patient`
-      )
-      .subscribe(
-        (res: IResult) => {
-          if (res && Array.isArray(res?.result)) {
-            card.result = res.result;
-            this.trigger('DISPLAY_TABLE', card.result);
-          }
-        },
-        (err) => {
-          console.log(err);
-          alert('Could not fetch stats');
-        },
-        () => {
-          this.activeCard.loading = false;
-        }
-      );
+  fetchHistory(key, hospital_number) {
+    this._http.get(`${this.baseURL}medical-history?key=${key}&hospital_number=${hospital_number}`).subscribe(
+      (res: IResult) => {
+        this.medicalHistory = res.result;
+        this.config = res.config;
+        console.log(this.medicalHistory);
+      },
+      (err) => {
+        console.log(err);
+        alert('Something went wrong');
+      }
+    );
   }
 
-  fetchHistory(card: ICard) {
+  fetchPatientData(hospitalNumber) {
     this._http
-      .get(
-        `${this.baseURL}query-runner?key=${card.key}&query=${
-          card.loadsHistory ? 'medical-history' : ''
-        }`
-      )
+      .get(`${this.baseURL}patient-info?hospital_number=${hospitalNumber||''}`)
       .subscribe(
         (res: IResult) => {
-          if (res && Array.isArray(res?.result)) {
-            card.result = res.result;
-            this.activeCard = card;
-            this.activeModel = card.model;
-            console.log("Active card before display", this.activeModel)
-            this.trigger('DISPLAY_TABLE', card.result);
-          } else {
-            alert(res.message ?? 'Something went wrong!');
+          if (res?.result) {
+            this.patient = res.result;
           }
         },
         (err) => {
           console.log(err);
-          alert('Something went wrong');
         }
       );
   }
@@ -104,6 +89,7 @@ interface IResult {
   result: object;
   error: boolean;
   message: string;
+  config: any;
 }
 
 export interface ICard {

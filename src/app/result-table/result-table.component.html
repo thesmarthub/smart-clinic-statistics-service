@@ -1,47 +1,41 @@
-<div>
-    <header class="card-header">
-        <p class="card-header-title">
-            {{service?.activeCard?.title}}
-        </p>
-    </header>
-
-    <div class="card-content" *ngIf="!service?.activeCard?.loading">
-        <div class="content">
-            <div class="columns">
-                <div class="column is-4">
-                    From: <input [(ngModel)]="service?.dateRange.startDate" class="input is-success" type="date"
-                        placeholder="Success input">
-                </div>
-                <div class="column is-4">
-                    To: <input [(ngModel)]="service?.dateRange.endDate" class="input is-success" type="date"
-                        placeholder="Success input">
-                </div>
-                <div class="column is-4">
-                    Action: <button class="button is-fullwidth" (click)="service?.filterDate()">Fetch
-                        Data</button>
-                </div>
-            </div>
-            <table class="table is-full-width">
-                <thead>
-                    <tr>
-                        <th class="is-size-4" *ngFor="let title of titles">{{title.title}}</th>
-                        <th class="is-size-4">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let result of displayedData">
-                        <td class="has-text-link has-text-weight-bold is-size-4" *ngFor="let val of titles">
-                            {{result[val.key]}}</td>
-                    </tr>
-
-
-                </tbody>
-            </table>
+<section class="hero is-info is-small">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <p class="title">
+                {{mService.patient?.fname || ''}} {{mService.patient?.lname || ''}} - Medical History
+            </p>
         </div>
     </div>
-    <footer class="card-footer">
+</section>
+<section>
+    <div fxLayout="row" fxFlex="100" class="example-container">
+        <div fxFlex="30">
+            <div *ngFor="let record of mService.medicalHistory; let i=index">
+                <button (click)="selectedIndex=i" style="min-width: 100%;" mat-button
+                    mat-button-raised>{{record.created_at | date:
+                    'medium'}}</button>
+            </div>
+        </div>
+        <div fxFlexFill>
+            <div style="padding-top: 50px;" *ngFor="let model of config?.model; let i = index">
+                <table *ngIf="model.type === 'table'" mat-table
+                    [dataSource]="dataReader(mService.medicalHistory[selectedIndex], config?.model[i].key)"
+                    class="mat-elevation-z8">
+                    <ng-container *ngFor="let h of model.headers" [matColumnDef]="h.key">
+                        <th mat-header-cell *matHeaderCellDef>{{h.title}}</th>
+                        <td mat-cell *matCellDef="let element"> {{modifiedValue(h, element)}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="table-title">
+                        <td mat-footer-cell *matFooterCellDef colspan="2">
+                            <span class="bolden">{{model.title}}</span>
+                        </td>
+                    </ng-container>
 
-        <a class="card-footer-item" (click)="deactivateModal()">Close</a>
-
-    </footer>
-</div>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns(model.headers)"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns(model.headers);"></tr>
+                    <tr mat-footer-row *matFooterRowDef="['table-title']" class="example-second-footer-row"></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

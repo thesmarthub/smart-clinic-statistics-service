@@ -64,28 +64,6 @@ export class StatisticsService {
       );
   }
 
-  fetchHistory(card: ICard) {
-    this._http
-      .get(
-        `${this.baseURL}query-runner?key=${card.key}&query=${
-          card.loadsHistory ? 'medical-history' : ''
-        }`
-      )
-      .subscribe(
-        (res: IResult) => {
-          if (res && Array.isArray(res?.result)) {
-            card.result = res.result;
-          } else {
-            alert(res.message ?? 'Something went wrong!');
-          }
-        },
-        (err) => {
-          console.log(err);
-          alert('Something went wrong');
-        }
-      );
-  }
-
   trigger(event: AppEvent, data) {
     this.broadcaster.next({ event, data });
   }

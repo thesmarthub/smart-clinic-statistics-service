@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ICard, StatisticsService } from '../statistics.service';
-import * as moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
 import { MedicalHistoryService } from '../medical-history.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ResultTableComponent } from '../result-table/result-table.component';
 
 @Component({
@@ -15,7 +13,8 @@ export class MedicalHistoryComponent implements OnInit {
   constructor(
     public matDialog: MatDialog,
     public mService: MedicalHistoryService,
-    public aRoute: ActivatedRoute
+    public aRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.aRoute.queryParams.subscribe((data) => {
       console.log(data);
@@ -23,42 +22,23 @@ export class MedicalHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mService?.broadcaster?.subscribe((bc) => {
-      console.log(bc);
-      if (bc?.event === 'DISPLAY_TABLE') {
-        this.activateModal(bc.data, true);
-        console.log("model", this.mService.activeModel)
-      }
-    });
+    this.mService.fetchCards();
   }
 
-  openCard(card: ICard) {
-    if (card.loadsHistory) {
-      return this.mService.fetchHistory(card);
-    }
-    if (!card.is_origin) {
-      return this.activateModal(card);
-    }
-    this.mService.fetchCards(card);
-  }
-
-  activateModal(card, hasData = false) {
+  openCard(card, hasData = false) {
+    this.router.navigateByUrl(`/medical-history?key=${card.key}`)
     // var element = document.getElementById('modal');
     // element.classList.add('is-active');
     // if (!hasData) {
     //   this.mService.fetchStats(card);
     // }
-    this.matDialog.open(ResultTableComponent, {
-      data: {
-        value: {
-          card: card,
-          model: this.mService.activeModel
-        },
-      },
-    });
-  }
+    // this.matDialog.open(ResultTableComponent, {
+    //   data: {
+    //     value: {
+    //       card: card,
+    //     },
+    //   },
+    // });
 
-  fetchStatsInRange() {
-    this.mService.fetchStats(this.mService.activeCard);
   }
 }
