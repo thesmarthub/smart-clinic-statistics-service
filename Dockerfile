@@ -22,6 +22,6 @@ RUN npm install express
 
 COPY server.js .
 
-EXPOSE 4300
+EXPOSE 3333
 
 CMD ["node", "server.js"]
