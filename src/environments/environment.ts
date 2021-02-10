@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseURL: localStorage.getItem("base_url")
+  baseURL: localStorage.getItem('base_url'),
 };
 
 /*
