@@ -16,8 +16,6 @@ FROM node:12-alpine AS runtime-stage
 
 COPY --from=build-stage /smart-clinic/dist ./dist
 
-COPY --from=build-stage /smart-clinic/release ./release
-
 RUN npm install express
 
 COPY server.js .
