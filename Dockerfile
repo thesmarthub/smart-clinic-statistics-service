@@ -10,7 +10,7 @@ COPY . .
 
 RUN npx ngcc
 
-RUN npx ng build --prod
+RUN npx ng build --prod --base-href /stats-front/
 
 FROM node:12-alpine AS runtime-stage
 
