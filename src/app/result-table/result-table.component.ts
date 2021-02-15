@@ -53,6 +53,7 @@ export class ResultTableComponent implements OnInit {
 
   dataReader(data, keys) {
     // keys = ["booking_info", "edd"]
+    if (!data) return [];
     console.log('conf', this.config, keys, data);
     let x = JSON.parse(JSON.stringify(data));
 
