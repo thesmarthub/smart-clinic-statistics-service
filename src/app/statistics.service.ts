@@ -41,12 +41,27 @@ export class StatisticsService {
     if (card) {
       this.activeCard = card;
     }
+    this.activeCard.filters?.map((filter) => {
+      return { key: filter.key, value: filter.value || '' };
+    });
+
+    const filters = this.activeCard.filters;
+    let urlPatch = '';
+    for (let index = 0; index < filters?.length; index++) {
+      const el = filters[index];
+      urlPatch += `&${el.key}=${el.value ?? ''}`;
+    }
+
+    console.log(urlPatch);
+
     this.activeCard.loading = true;
     this._http
       .get(
-        `${this.baseURL}dynamic-stats?action=${this.activeCard?.key ?? ''}&start_date=${
-          this.dateRange.startDate
-        }&end_date=${this.dateRange.endDate}&populate=patient`
+        `${this.baseURL}dynamic-stats?action=${
+          this.activeCard?.key ?? ''
+        }&start_date=${this.dateRange.startDate}&end_date=${
+          this.dateRange.endDate
+        }&populate=patient${urlPatch}`
       )
       .subscribe(
         (res: IResult) => {

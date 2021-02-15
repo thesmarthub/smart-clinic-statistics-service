@@ -43,7 +43,7 @@
 
 
     </div>
-    <div id="modal" class="modal is-clipped">
+    <div id="modal" class="modal">
       <div class="modal-background"></div>
       <div class="modal-content">
         <div class="card">
@@ -55,15 +55,42 @@
 
           <div class="card-content" *ngIf="!sService.activeCard?.loading">
             <div class="content">
-              <div class="columns">
+              <div class="columns is-multiline">
                 <div class="column is-4">
-                  From: <input [(ngModel)]="sService.dateRange.startDate" class="input is-success" type="date" placeholder="Success input">
+                  From: <input [(ngModel)]="sService.dateRange.startDate" class="input is-success" type="date"
+                    placeholder="Success input">
                 </div>
                 <div class="column is-4">
-                  To: <input [(ngModel)]="sService.dateRange.endDate" class="input is-success" type="date" placeholder="Success input">
+                  To: <input [(ngModel)]="sService.dateRange.endDate" class="input is-success" type="date"
+                    placeholder="Success input">
                 </div>
                 <div class="column is-4">
                   Action: <button class="button is-fullwidth" (click)="sService.fetchStats()">Fetch Data</button>
+                </div>
+              </div>
+              <!-- <div class="columns">
+                <div class="column is-4">
+                  From: <input [(ngModel)]="sService.dateRange.startDate" class="input is-success" type="date"
+                    placeholder="Success input">
+                </div>
+              </div> -->
+              <div class="columns is-multiline" >
+                <div class="column" *ngFor="let filter of sService?.activeCard?.filters">
+                  <b>{{filter.title}}:</b>
+                  <select *ngIf="filter.type==='select'" [(ngModel)]="filter.value" class="input is-success">
+                    <option *ngFor="let val of filter.possible_values" [value]="val.value">{{val.title}}</option>
+                  </select>
+                  <div class="columns is-multiple" *ngIf="filter.type==='date'&&filter.range">
+                    <div class="column is-6">
+                      From: <input [(ngModel)]="sService.dateRange.startDate" class="input is-success" type="date"
+                        placeholder="Success input">
+                    </div>
+                    <div class="column is-6">
+                      To: <input [(ngModel)]="sService.dateRange.endDate" class="input is-success" type="date"
+                        placeholder="Success input">
+                    </div>
+                  </div>
+                  <!-- <input *ngIf="filter.type==='string'" > -->
                 </div>
               </div>
               <table class="table">
@@ -71,8 +98,6 @@
                   <tr>
                     <th class="is-size-4">Title</th>
                     <th class="is-size-4">Value</th>
-
-
                   </tr>
                 </thead>
 

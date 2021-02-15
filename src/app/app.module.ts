@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
+import { DynamicStatsComponent } from './dynamic-stats/dynamic-stats.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
     DataCardsComponent,
     MedicalHistoryComponent,
     ResultTableComponent,
+    DynamicStatsComponent,
   ],
   imports: [
     AppRoutingModule,

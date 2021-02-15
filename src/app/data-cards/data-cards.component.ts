@@ -8,6 +8,7 @@ import * as moment from 'moment';
   styleUrls: ['./data-cards.component.css'],
 })
 export class DataCardsComponent implements OnInit {
+  searchFilter: Record<string, any> = {};
   constructor(public sService: StatisticsService) {}
 
   ngOnInit(): void {
@@ -15,7 +16,7 @@ export class DataCardsComponent implements OnInit {
   }
 
   openCard(card: ICard) {
-    this.sService.fetchStats(card)
+    this.sService.fetchStats(card);
   }
 
   activateModal(card, hasData = false) {
@@ -33,5 +34,10 @@ export class DataCardsComponent implements OnInit {
   deactivateModal() {
     var element = document.getElementById('modal');
     element.classList.remove('is-active');
+  }
+
+  collectData(filter) {
+    this.searchFilter[filter.key] = filter.value;
+    console.log(filter);
   }
 }
