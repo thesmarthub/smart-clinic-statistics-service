@@ -10,8 +10,8 @@ import { AppService } from './app.service';
 })
 export class MedicalHistoryService {
   broadcaster = new BehaviorSubject<{ event: AppEvent; data: any }>(null);
-  // baseURL = environment.baseURL;
-  baseURL = "http://localhost:5005/";
+  baseURL = environment.baseURL;
+  // baseURL = "http://localhost:5005/";
 
   cards = new BehaviorSubject<Record<string, any>[]>([]);
   activeCard;

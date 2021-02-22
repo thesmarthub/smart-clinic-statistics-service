@@ -4,7 +4,28 @@
             <p class="title">
                 {{mService.patient?.fname || ''}} {{mService.patient?.lname || ''}} - Medical History
             </p>
+            <hr>
+            <div class="example-button-row">
+                <button mat-raised-button (click)="pharmRoute()"> Pharmacy</button>
+                <button mat-raised-button (click)="consultationRoute()">Consultation</button>
+                <button mat-raised-button (click)="radiologyRoute()">Radiology</button>
+                <button mat-raised-button (click)="labRoute()">Labouratory</button> <br>
+                <div style="width:40%; margin-top:1%; margin-left:30%">
+                    <div class="field has-addons">
+                        <div class="control has-icons-left has-icons-right is-expanded">
+                            <input type="text" [(ngModel)]="search_patient" class="input is-info is-small"
+                                placeholder="Enter words to search">
+                        </div>
+                        <p class="control">
+                            <button (click)="search()" class="button is-info is-small">SEARCH</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+
     </div>
 </section>
 <section>
@@ -16,6 +37,7 @@
                     'medium'}}</button>
             </div>
         </div>
+        
         <div fxFlexFill>
             <div style="padding-top: 50px;" *ngFor="let model of config?.model; let i = index">
                 <table *ngIf="model.type === 'table'" mat-table
@@ -37,5 +59,8 @@
                 </table>
             </div>
         </div>
+
+
+        
     </div>
 </section>
