@@ -10,6 +10,7 @@ table {
 
 .hero {
   background-color: #673ab7;
+  position: static;
 }
 
 .example-tree-invisible {
@@ -21,4 +22,9 @@ table {
   margin-top: 0;
   margin-bottom: 0;
   list-style-type: none;
+}
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
 }

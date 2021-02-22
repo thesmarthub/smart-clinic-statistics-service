@@ -11,6 +11,8 @@ import { AppService } from './app.service';
 export class MedicalHistoryService {
   broadcaster = new BehaviorSubject<{ event: AppEvent; data: any }>(null);
   baseURL = environment.baseURL;
+  // baseURL = "http://localhost:5005/";
+
   cards = new BehaviorSubject<Record<string, any>[]>([]);
   activeCard;
   dateRange = {
@@ -44,7 +46,7 @@ export class MedicalHistoryService {
       (res: IResult) => {
         this.medicalHistory = res.result;
         this.config = res.config;
-        console.log(this.medicalHistory);
+        console.log(this.medicalHistory, "me hx");
       },
       (err) => {
         console.log(err);
