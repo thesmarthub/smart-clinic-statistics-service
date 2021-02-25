@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
@@ -8,5 +9,5 @@ import { AppEvent } from './medical-history.service';
   providedIn: 'root',
 })
 export class AppService {
-  constructor() {}
+  constructor(public http: HttpClient) {}
 }

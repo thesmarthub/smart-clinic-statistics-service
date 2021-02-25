@@ -18,6 +18,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
 import { DynamicStatsComponent } from './dynamic-stats/dynamic-stats.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -31,16 +37,22 @@ import { DynamicStatsComponent } from './dynamic-stats/dynamic-stats.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    FlexModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
-    MatDialogModule,
-    FlexModule,
-    MatSidenavModule,
     MatButtonModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatMomentDateModule,
+    MatSelectModule,
+    MatSidenavModule,
     MatTableModule,
     MatTreeModule,
-    MatIconModule,
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

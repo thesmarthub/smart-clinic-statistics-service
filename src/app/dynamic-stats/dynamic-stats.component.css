@@ -1,0 +1,30 @@
+* {
+    color: grey;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+button {
+    font-weight: bold;
+}
+.active {
+  /* background-color: #66fd; */
+  background-color: rgba(242, 242, 253, 0.867);
+  /* color: rgba(34, 34, 49, 0.867); */
+  color: grey;
+  font-weight: bolder;
+}
+
+.side-nav {
+  padding-top: 50px;
+  background-color: rgba(211, 211, 250, 0.867);
+  min-height: 100vh;
+}
+
+div.side-nav div {
+  /* background-color: azure; */
+  margin-bottom: 5px;
+}
+
+.filterView {
+  padding: 10px;
+  background-color: rgba(242, 242, 253, 0.867);
+}

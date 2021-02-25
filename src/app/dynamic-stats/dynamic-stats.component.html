@@ -1,1 +1,74 @@
-<p>dynamic-stats works!</p>
+<!-- {{dService.allSchemas[0]?.paths[0] | json}} -->
+<div fxLayout="row" fxLayoutAlign="space-between" fxFlex="100">
+    <div fxLayout="column" class="side-nav">
+        <!-- <h3 mat-button>MODELS</h3> -->
+        <div *ngFor="let schema of dService.allSchemas" (click)="selectSchema(schema)">
+            <button fxFlex="100" [class.active]="selectedSchema?.modelName===schema?.modelName"
+                mat-button>{{schema?.modelName}}</button>
+        </div>
+    </div>
+    <div fxFlex fxLayout="column" class="filterView">
+        <h2><b>{{selectedSchema?.modelName}}</b></h2>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Select Filter</mat-label>
+                <mat-select multiple (selectionChange)="selectPath($event.value)">
+                    <mat-option *ngFor="let pathData of selectedSchema?.paths" [value]="pathData">
+                        {{pathData.path}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <ng-container *ngFor="let pathData of selectedPaths">
+            <mat-form-field *ngIf="pathData.data.instance==='String' && pathData.data?.enumValues?.length < 1"
+                class="example-form-field">
+                <mat-label>{{pathData.path}}</mat-label>
+                <input matInput type="text" [(ngModel)]="pathData.searchValue">
+                <button mat-button *ngIf="pathData.searchValue" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="pathData.searchValue=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            <mat-form-field *ngIf="pathData.data.instance==='Number' && pathData.data?.enumValues?.length < 1"
+                class="example-form-field">
+                <mat-label>{{pathData.path}}</mat-label>
+                <input matInput type="number" [(ngModel)]="pathData.searchValue">
+                <button mat-button *ngIf="pathData.searchValue" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="pathData.searchValue=''">
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </mat-form-field>
+            <mat-form-field *ngIf="pathData.data.enumValues?.length > 0" appearance="fill">
+                <mat-label>{{pathData.path}}</mat-label>
+                <mat-select (selectionChange)="pathData.searchValue=$event.value">
+                    <mat-option *ngFor="let enumVal of pathData?.data?.enumValues" [value]="enumVal">
+                        {{enumVal}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-checkbox *ngIf="pathData.data.enumValues?.length < 1 && pathData.data.instance==='Boolean'" required
+                [checked]="false" [(ngModel)]="pathData.searchValue">
+                {{pathData.path}}
+            </mat-checkbox>
+            <div fxLayout="row" *ngIf="pathData.data.instance==='Date'">
+                <mat-form-field color="accent" appearance="fill">
+                    <mat-label>Start Date</mat-label>
+                    <input matInput [matDatepicker]="picker1" [(ngModel)]="pathData.startRange">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field color="accent" appearance="fill">
+                    <mat-label>End Date</mat-label>
+                    <input matInput [matDatepicker]="picker2" [(ngModel)]="pathData.endRange">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </ng-container>
+        <button mat-button mat-raised-button (click)="fetchResult()">Run Query</button>
+    </div>
+    <div fxFlex="50">
+        RESULT
+    </div>
+</div>
