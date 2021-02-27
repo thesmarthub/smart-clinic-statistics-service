@@ -11,6 +11,7 @@ export class DynamicStatsService {
   allSchemas: ISchema[] = [];
   selectedSchemas: ISchema[] = [];
   result;
+  activeResultType = 'number';
   readonly notifier = new BehaviorSubject<'FETCHED SCHEMAS'>(null);
 
   constructor(private appService: AppService) {}
@@ -45,6 +46,7 @@ export class DynamicStatsService {
       .subscribe((res) => {
         if (res && res['result']) {
           this.result = res['result'];
+          this.activeResultType = typeof this.result;
         }
       });
   }
