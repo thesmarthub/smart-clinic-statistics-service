@@ -1,5 +1,5 @@
 <!-- {{dService.allSchemas[0]?.paths[0] | json}} -->
-<div fxLayout="row" fxLayoutAlign="space-between" fxFlex="100">
+<div fxLayout="row wrap" fxLayoutAlign="space-between" fxFlex>
     <div fxLayout="column" class="side-nav">
         <!-- <h3 mat-button>MODELS</h3> -->
         <div *ngFor="let schema of dService.allSchemas" (click)="selectSchema(schema)">
@@ -68,7 +68,22 @@
         </ng-container>
         <button mat-button mat-raised-button (click)="fetchResult()">Run Query</button>
     </div>
-    <div fxFlex="50">
-        RESULT
+    <div fxFlex>
+        <mat-checkbox [(ngModel)]="fetchOnlyCount">Count Only</mat-checkbox>
+        <h2 *ngIf="fetchOnlyCount">RESULT: {{dService.result}}</h2>
+
+        <table *ngIf="!fetchOnlyCount">
+            <tr>
+                <th *ngFor="let pathData of selectedPaths">{{pathData.path}}</th>
+            </tr>
+            <tr *ngFor="let item of dService.result">
+                <td *ngFor="let pathData of selectedPaths">
+                    <span *ngIf="pathData.data?.instance!=='Date'">{{item[pathData?.path]}}</span>
+                    <span *ngIf="pathData.data?.instance==='Date'">{{item[pathData?.path] | date: medium}}</span>
+                </td>
+            </tr>
+
+        </table>
+
     </div>
 </div>

@@ -25,10 +25,21 @@ export class DynamicStatsService {
       });
   }
 
-  runQuery(payload, action, populateFields, selectFields, shouldFetchDetails) {
+  runQuery(
+    payload,
+    action: string,
+    populateFields,
+    selectFields,
+    shouldFetchDetails
+  ) {
+    if (!action.endsWith('s')) {
+      action = `${action}s`;
+    }
     this.appService.http
       .post(
-        `${this.baseUrl}run-query?action=${action}&populate=${populateFields}&select=${selectFields}&fetch_details=${shouldFetchDetails}`,
+        `${
+          this.baseUrl
+        }stats/${action.toLowerCase()}?action=${action}&populate=${populateFields}&select=${selectFields}&fetch_details=${shouldFetchDetails}`,
         payload
       )
       .subscribe((res) => {

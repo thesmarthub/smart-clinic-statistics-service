@@ -28,3 +28,62 @@ div.side-nav div {
   padding: 10px;
   background-color: rgba(242, 242, 253, 0.867);
 }
+
+
+
+table {
+  margin-bottom: 20px;
+}
+
+caption {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #6c757d;
+  text-align: left;
+  caption-side: top;
+}
+
+#reports {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  overflow: scroll;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #673ab7;
+  color: white;
+}
+
+.even {
+  border-color: #673ab7;
+  background-color: #673ab7;
+  color: white;
+}
+.odd {
+  border-color: white;
+  background-color: white;
+  color: #673ab7;
+}
+
+.overflowScroll {
+  overflow: scroll;
+}
