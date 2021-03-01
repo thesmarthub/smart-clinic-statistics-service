@@ -9,7 +9,9 @@ import * as moment from 'moment';
 })
 export class StatisticsService {
   broadcaster = new BehaviorSubject<{ event: AppEvent; data: any }>(null);
-  baseURL = environment.baseURL;
+  // baseURL = environment.baseURL;
+  baseURL = "http://localhost:5005/";
+
   cards = new BehaviorSubject<Record<string, any>[]>([]);
 
   activeCard;
