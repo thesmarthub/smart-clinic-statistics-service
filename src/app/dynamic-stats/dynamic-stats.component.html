@@ -1,27 +1,36 @@
 <!-- {{dService.allSchemas[0]?.paths[0] | json}} -->
 <div fxLayout="row" fxLayoutAlign="space-between" fxFlex>
     <div fxLayout="column" class="side-nav">
-        <!-- <h3 mat-button>MODELS</h3> -->
         <div *ngFor="let schema of dService.allSchemas" (click)="selectSchema(schema)">
             <button fxFlex="100" [class.active]="selectedSchema?.modelName===schema?.modelName"
                 mat-button>{{schema?.modelName}}</button>
         </div>
     </div>
     <div fxFlex fxLayout="row wrap">
-        <div fxFlex fxLayout="column" class="filterView">
-            <h2><b>{{selectedSchema?.modelName}}</b></h2>
+        <div fxFlex fxLayout="column" fxLayoutAlign="start center" class="filterView">
+            <h2><strong>{{selectedSchema?.modelName}}</strong></h2>
             <div>
-                <mat-form-field appearance="fill">
-                    <mat-label>Select Filter</mat-label>
-                    <mat-select multiple (selectionChange)="selectPath($event.value)">
-                        <mat-option *ngFor="let pathData of selectedSchema?.paths" [value]="pathData">
-                            {{pathData.path}}
+                <mat-form-field class="example-chip-list">
+                    <mat-label>Selected Fields</mat-label>
+                    <mat-chip-list #chipList aria-label="Path Selection">
+                        <mat-chip *ngFor="let pathData of selectedPaths; let i = index" [selectable]="selectable">
+                            {{pathData.label ? pathData.label : pathData.path}}
+                            <mat-icon (click)="removePath(i)">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Select Filter" [formControl]="selectFieldControl" #filterInput
+                            [matAutocomplete]="auto" [matChipInputFor]="chipList">
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete"
+                        (optionSelected)="selectPath($event?.option?.value, filterInput)">
+                        <mat-option [matTooltip]="pathData.label" *ngFor="let pathData of selectedFieldFilterOptions" [value]="pathData">
+                            {{pathData.label ? pathData.label : pathData.path}}
                         </mat-option>
-                    </mat-select>
+                    </mat-autocomplete>
                 </mat-form-field>
             </div>
             <ng-container *ngFor="let pathData of selectedPaths">
-                <mat-form-field *ngIf="pathData.data.instance==='String' && pathData.data?.enumValues?.length < 1"
+                <mat-form-field
+                    *ngIf="(pathData.data.instance==='String' || pathData.path === 'diagnosis') && pathData.data?.enumValues?.length < 1"
                     class="example-form-field">
                     <mat-label>{{pathData.path}}</mat-label>
                     <input matInput type="text" [(ngModel)]="pathData.searchValue">
@@ -52,34 +61,59 @@
                     {{pathData.path}}
                 </mat-checkbox>
                 <div fxLayout="row" *ngIf="pathData.data.instance==='Date'">
-                    <mat-form-field color="accent" appearance="fill">
-                        <mat-label>Start Date</mat-label>
+                    <mat-form-field *ngIf="pathData.helper?.type!=='age'" color="accent" appearance="fill">
+                        <mat-label>From</mat-label>
                         <input matInput [matDatepicker]="picker1" [(ngModel)]="pathData.startRange">
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                         <mat-datepicker #picker1></mat-datepicker>
+                        <mat-hint>{{pathData.label}}</mat-hint>
                     </mat-form-field>
 
-                    <mat-form-field color="accent" appearance="fill">
-                        <mat-label>End Date</mat-label>
+                    <mat-form-field *ngIf="pathData.helper?.type!=='age'" color="accent" appearance="fill">
+                        <mat-label>To</mat-label>
                         <input matInput [matDatepicker]="picker2" [(ngModel)]="pathData.endRange">
                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                        <mat-hint>{{pathData.label}}</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field *ngIf="pathData.helper?.type==='age'" color="accent" appearance="fill">
+                        <mat-label>From</mat-label>
+                        <input matInput [(ngModel)]="pathData.startRangeStr">
+                        <mat-hint>From Age E.g. <em>11 months</em></mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field *ngIf="pathData.helper?.type==='age'" color="accent" appearance="fill">
+                        <mat-label>To</mat-label>
+                        <input matInput [(ngModel)]="pathData.endRangeStr">
+                        <mat-hint>To Age E.g. <em>2 years</em></mat-hint>
                     </mat-form-field>
                 </div>
             </ng-container>
-            <button mat-button mat-raised-button (click)="fetchResult()">Run Query</button>
+            <button color="primary" mat-button mat-raised-button (click)="fetchResult()">Run Query</button>
         </div>
-        <div fxFlex>
+        <div fxFlex fxLayout="column" fxLayoutAlign="center center" *ngIf="dService.runningQuery">
+            <progress></progress>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center center" class="resultView" fxFlex *ngIf="!dService.runningQuery">
             <mat-checkbox [(ngModel)]="fetchOnlyCount">Count Only</mat-checkbox>
-            <h2 *ngIf="fetchOnlyCount && dService.activeResultType === 'number'">RESULT: {{dService.result}}</h2>
+            <h2
+                *ngIf="fetchOnlyCount && dService.activeResultType === 'number' && (dService.result || dService.result===0)">
+                RESULT: {{dService.result}}</h2>
 
             <table *ngIf="!fetchOnlyCount && dService.activeResultType === 'object'">
+                <caption>{{selectedSchema?.modelName}}</caption>
                 <tr>
-                    <th *ngFor="let pathData of selectedPaths">{{pathData.path}}</th>
+                    <th [id]="i" *ngFor="let pathData of selectedPaths; let i = index">{{pathData.path}}</th>
                 </tr>
                 <tr *ngFor="let item of dService.result">
                     <td *ngFor="let pathData of selectedPaths">
-                        <span *ngIf="pathData.data?.instance!=='Date'">{{item[pathData?.path]}}</span>
+                        <ng-container *ngIf="pathData.path==='diagnosis'">
+                            <span *ngFor="let diagnosis of item[pathData?.path]"> * {{diagnosis?.code}} -
+                                {{diagnosis?.desc}}</span>
+                        </ng-container>
+                        <span
+                            *ngIf="pathData.data?.instance!=='Date' && pathData.path!=='diagnosis'">{{item[pathData?.path]}}</span>
                         <span *ngIf="pathData.data?.instance==='Date'">{{item[pathData?.path] | date: medium}}</span>
                     </td>
                 </tr>

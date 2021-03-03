@@ -1,22 +1,38 @@
 * {
-    color: grey;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: grey;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 button {
-    font-weight: bold;
+  font-weight: bold;
+  color: white;
+  margin: 5px;
+  border: 1px solid transparent;
 }
+
+button:hover {
+  border: 1px solid white;
+}
+
 .active {
   /* background-color: #66fd; */
   background-color: rgba(242, 242, 253, 0.867);
   /* color: rgba(34, 34, 49, 0.867); */
-  color: grey;
+  color: #7400b8;
   font-weight: bolder;
 }
 
 .side-nav {
   padding-top: 50px;
-  background-color: rgba(211, 211, 250, 0.867);
+  background-color: #673ab7;
+  color: white !important;
+  overflow: scroll;
+  max-height: 100vh;
   min-height: 100vh;
+  /* width */
+}
+
+::-webkit-scrollbar {
+  width: 2px;
 }
 
 div.side-nav div {
@@ -26,10 +42,13 @@ div.side-nav div {
 
 .filterView {
   padding: 10px;
-  background-color: rgba(242, 242, 253, 0.867);
+  background-color: white;
 }
 
-
+.resultView {
+  padding: 10px;
+  background-color: rgba(242, 242, 253, 0.867);
+}
 
 table {
   margin-bottom: 20px;
@@ -86,4 +105,12 @@ th {
 
 .overflowScroll {
   overflow: scroll;
+}
+
+.example-chip-list {
+  width: 100%;
+}
+
+mat-form-field {
+  margin: 5px;
 }
