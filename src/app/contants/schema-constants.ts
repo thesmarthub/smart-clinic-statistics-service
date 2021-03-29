@@ -4,6 +4,7 @@ export const schemaHelperMap = {
     models: [
       'Patient',
       'AppointmentRecord',
+      'AdmissionRecord',
       'Consultation',
       'LabRequest',
       'RadiologyRequest',
@@ -76,6 +77,19 @@ export const schemaHelperMap = {
     label: 'Date Admitted',
     transform: 'Date',
   },
+  "discharge_summary.date_of_admission": {
+    type: 'date',
+    models: ['AdmissionRecord'],
+    label: 'Date of Admission',
+    transform: 'Date'
+  },
+  "discharge_summary.date_of_discharge": {
+    type: 'date',
+    models: ['AdmissionRecord'],
+    label: 'Date of Discharge',
+    transform: 'Date'
+  },
+  
 };
 
 export interface ISchemaHelperMap {
