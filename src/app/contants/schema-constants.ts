@@ -43,7 +43,7 @@ export const schemaHelperMap = {
     label: 'First Name',
   },
   lname: {
-    type: 'date',
+    type: 'string',
     models: '*',
     label: 'Last Name',
   },
@@ -94,8 +94,12 @@ export const schemaHelperMap = {
 
 export interface ISchemaHelperMap {
   api?: string;
-  models: string[];
+  models: string[] | string;
   display?: string[];
   field?: string;
   type: string;
+  transform?: string;
+  label?: string;
+  enum?: any[];
+  hide?: boolean;
 }
