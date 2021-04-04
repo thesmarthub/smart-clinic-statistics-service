@@ -42,7 +42,7 @@ export const schemaHelperMap = {
     label: 'First Name',
   },
   lname: {
-    type: 'date',
+    type: 'string',
     models: '*',
     label: 'Last Name',
   },
@@ -75,6 +75,85 @@ export const schemaHelperMap = {
     models: ['AdmissionRecord'],
     label: 'Date Admitted',
     transform: 'Date',
+  },
+  alt_phone: {
+    type: 'string',
+    models: ['Patient'],
+    label: 'Alternative Phone number',
+  },
+  antenatal_status: {
+    type: 'string',
+    models: ['Patient'],
+    label: 'Antenatal Status',
+  },
+  // consultation_history.developmental_milestone.fine_motor.adequate: {
+  //   type: 'string',
+  //   models: ['Patient'],
+  //   label: 'Antenatal Status',
+  // },
+  date_of_evacuation: {
+    type: 'date',
+    models: ['Patient'],
+    label: 'Date of Evacuation',
+    transform: 'Date',
+  },
+  family_members: {
+    type: 'string',
+    models: ['Patient'],
+    label: 'Family Members',
+  },
+  hiv_status: { 
+    type: 'boolean',
+    models: ['Patient'], 
+    label: 'HIV Status',
+    transform: 'Boolean',
+  },
+  hospital_branch_code: {
+    type: 'string',
+    models: ['Patient'],
+    label: 'Hospital Branch Code',
+  },
+  is_art: {
+    type: 'boolean',
+    models: ['Patient'],
+    label: 'ART patient',
+    transform: 'Boolean',
+  },
+  hmo_benefactors: {
+    type: 'string',
+    models: ['Patient'],
+    label: 'HMO Benefactors',
+  },
+  hmo_beneficiaries: {
+    type: 'string',
+    models: ['Patient'],
+    label: 'HMO Beneficiaries',
+  },
+  hmo_expiry_date: {
+    type: 'date',
+    models: ['Patient'],
+    label: 'HMO Expiring Date',
+    transform: 'Date',
+  },
+  hmo_group: {
+    type: 'string',
+    models: ['Patient'],
+    label: 'HMO Group',
+  },
+  hmo_code: {
+    type: 'string',
+    models: ['Patient'],
+    label: 'HMO Code',
+  },
+  other_hmo_codes: {
+    type: 'string',
+    models: ['Patient'],
+    label: 'Other HMO Code',
+  },
+  patient_hmo_code: {
+    type: 'string',
+    models: ['Patient'],
+    label: 'Patient HMO Code',
   },
 };
 
