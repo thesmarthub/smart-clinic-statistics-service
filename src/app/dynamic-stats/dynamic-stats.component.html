@@ -13,10 +13,12 @@
                 <mat-form-field class="example-chip-list">
                     <mat-label>Selected Fields</mat-label>
                     <mat-chip-list #chipList aria-label="Path Selection">
-                        <mat-chip *ngFor="let pathData of selectedPaths; let i = index" [selectable]="selectable">
+                        <ng-container *ngFor="let pathData of selectedPaths; let i = index">
+                        <mat-chip *ngIf="pathData.hide" [selectable]="selectable" >
                             {{pathData.label ? pathData.label : pathData.path}}
                             <mat-icon (click)="removePath(i)">cancel</mat-icon>
                         </mat-chip>
+                        </ng-container>
                         <input placeholder="Select Filter" [formControl]="selectFieldControl" #filterInput
                             [matAutocomplete]="auto" [matChipInputFor]="chipList">
                     </mat-chip-list>
@@ -30,7 +32,7 @@
             </div>
             <ng-container *ngFor="let pathData of selectedPaths">
                 <mat-form-field
-                    *ngIf="(pathData.data.instance==='String' || pathData.path === 'diagnosis') && pathData.data?.enumValues?.length < 1"
+                    *ngIf="(pathData.data.instance==='String' || pathData.hide === true|| pathData.path === 'diagnosis') && pathData.data?.enumValues?.length < 1"
                     class="example-form-field">
                     <mat-label>{{pathData.path}}</mat-label>
                     <input matInput type="text" [(ngModel)]="pathData.searchValue">

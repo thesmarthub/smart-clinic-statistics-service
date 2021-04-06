@@ -4,6 +4,7 @@ export const schemaHelperMap = {
     models: [
       'Patient',
       'AppointmentRecord',
+      'AdmissionRecord',
       'Consultation',
       'LabRequest',
       'RadiologyRequest',
@@ -57,12 +58,14 @@ export const schemaHelperMap = {
     models: '*',
     label: 'Sex',
     enum: ['Female', 'Male'],
+    hide: true
   },
   patient_sex: {
     type: 'string',
     models: '*',
     label: 'Sex',
     enum: ['Female', 'Male'],
+    hide: true
   },
   activePackage: {
     type: 'string',
@@ -155,12 +158,29 @@ export const schemaHelperMap = {
     models: ['Patient'],
     label: 'Patient HMO Code',
   },
+  "discharge_summary.date_of_admission": {
+    type: 'date',
+    models: ['AdmissionRecord'],
+    label: 'Date of Admission',
+    transform: 'Date'
+  },
+  "discharge_summary.date_of_discharge": {
+    type: 'date',
+    models: ['AdmissionRecord'],
+    label: 'Date of Discharge',
+    transform: 'Date'
+  },
+  
 };
 
 export interface ISchemaHelperMap {
   api?: string;
-  models: string[];
+  models: string[] | string;
   display?: string[];
   field?: string;
   type: string;
+  transform?: string;
+  label?: string;
+  enum?: any[];
+  hide?: boolean;
 }

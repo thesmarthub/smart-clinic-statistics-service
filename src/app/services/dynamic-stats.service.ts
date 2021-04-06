@@ -29,7 +29,7 @@ export class DynamicStatsService {
           this.allSchemas = res['result'];
           this.allSchemas?.map((schema) => {
             schema.paths.forEach((pathData) => {
-              const helper = schemaHelperMap[pathData.path];
+              const helper: ISchemaHelperMap = schemaHelperMap[pathData.path];
               pathData['label'] = pathData.path;
               if (
                 helper &&
@@ -42,6 +42,9 @@ export class DynamicStatsService {
                 }
                 if (helper.label) {
                   pathData['label'] = helper.label;
+                }
+                if (helper.hide) {
+                  pathData['hide'] = helper.hide;
                 }
                 if(helper.enum) {
                   pathData['data']['enumValues'] = helper.enum
