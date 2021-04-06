@@ -58,12 +58,14 @@ export const schemaHelperMap = {
     models: '*',
     label: 'Sex',
     enum: ['Female', 'Male'],
+    hide: true
   },
   patient_sex: {
     type: 'string',
     models: '*',
     label: 'Sex',
     enum: ['Female', 'Male'],
+    hide: true
   },
   activePackage: {
     type: 'string',
