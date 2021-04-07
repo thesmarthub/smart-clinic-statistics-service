@@ -1,3 +1,68 @@
+const hiddenProps = (propsToHide: string[]) => {
+  const finalObj = {};
+  propsToHide.forEach((val) => {
+    finalObj[val] = {
+      hide: true,
+      models: '*',
+    };
+  });
+  return finalObj;
+};
+
+const propsToHide = [
+  'address',
+  'appointment',
+  'attached_to',
+  'care_plan',
+  'consultation',
+  'daily_report.assessment',
+  'daily_report.background',
+  'daily_report.recommendation',
+  'daily_report.report',
+  'daily_report.situation',
+  'daily_report.entry_by',
+  'daily_report.entry_by_name',
+  'daily_report.date_created',
+  'daily_reports',
+  'departments',
+  'discharge_options',
+  'discharge_summary.clinic_appointment',
+  'Date of Admission',
+  'discharge_summary.definitive_diagnosis',
+  'discharge_summary.discharge_medications',
+  'discharge_summary.relevant_investigation_results',
+  'discharge_summary.status_on_discharge',
+  'duration_in_hours',
+  'duration_in_days',
+  'discharge_summary.staff',
+  'fluid_balance',
+  'hmo_beneficiaries',
+  'fluid_detail.amount_bf',
+  'fluid_detail.amount_to_be_given',
+  'fluid_detail.iv_fluid_details',
+  'hospital_branch_code',
+  'discharge_summary.date_of_admission',
+  'lab_requests',
+  'adult_feeding_chart',
+  'nursing_history.examinations',
+  'nursing_history.glucose_profile_chart_fields',
+  'nursing_history.history.elimination',
+  'neonatal_feeding_chart',
+  'nursing_history.history.activity_or_exercise',
+  'nursing_history.history.communication_or_special_senses',
+  'nursing_history.history.coping_with_stress',
+  'nursing_history.history.family_social_relationship',
+  'nursing_history.history.feeling_about_self_or_image',
+  'nursing_history.history.information',
+  'nursing_history.history.nutrition',
+  '	nursing_history.history.other_information',
+  'nursing_history.history.sexuality_or_reproduction',
+  'nursing_history.history.sleep_and_rest',
+  'nursing_history.history.state_of_health.past',
+  'nursing_history.history.values_and_beliefs',
+
+];
+
 export const schemaHelperMap = {
   d_o_b: {
     type: 'age',
@@ -47,6 +112,22 @@ export const schemaHelperMap = {
     models: '*',
     label: 'Last Name',
   },
+  patient_name: {
+    type: 'string',
+    models: '*',
+    label: 'Patient Name',
+  },
+  hospital_number: {
+    type: 'string',
+    models: '*',
+    label: 'Hospital Name',
+  },
+  number_of_nights: {
+    type: 'number',
+    models: '*',
+    label: 'Number of Nights',
+  },
+
   appointment_time: {
     type: 'date',
     models: ['AppointmentModel'],
@@ -58,14 +139,12 @@ export const schemaHelperMap = {
     models: '*',
     label: 'Sex',
     enum: ['Female', 'Male'],
-    hide: true
   },
   patient_sex: {
     type: 'string',
     models: '*',
     label: 'Sex',
     enum: ['Female', 'Male'],
-    hide: true
   },
   activePackage: {
     type: 'string',
@@ -79,6 +158,59 @@ export const schemaHelperMap = {
     label: 'Date Admitted',
     transform: 'Date',
   },
+  admitted_by: {
+    type: 'string',
+    models: ['AdmissionRecord'],
+    label: 'Admitted By',
+  },
+
+  'bed.name': {
+    type: 'string',
+    models: ['AdmissionRecord'],
+    label: 'Bed Name',
+  },
+
+  'condition.stable': {
+    type: 'boolean',
+    models: ['AdmissionRecord'],
+    label: 'Stable Condition',
+  },
+
+  'condition.ventilator': {
+    type: 'boolean',
+    models: ['AdmissionRecord'],
+    label: 'On Ventilator',
+  },
+
+  discharge_method: {
+    type: 'string',
+    models: ['AdmissionRecord'],
+    label: 'Discharge Method',
+  },
+
+  'Date of Discharge': {
+    type: 'date',
+    models: ['AdmissionRecord'],
+    label: 'Date of Discharge',
+  },
+
+  'discharge_summary.provisional_diagnosis': {
+    type: 'string',
+    models: ['AdmissionRecord'],
+    label: 'Provisional Diagnosis',
+  },
+
+  'discharge_summary.staff_name': {
+    type: 'string',
+    models: ['AdmissionRecord'],
+    label: 'Discharged By',
+  },
+  final_diagnosis: {
+    type: 'string',
+    models: ['AdmissionRecord'],
+    label: 'Final Diagnosis',
+  },
+
   alt_phone: {
     type: 'string',
     models: ['Patient'],
@@ -105,9 +237,9 @@ export const schemaHelperMap = {
     models: ['Patient'],
     label: 'Family Members',
   },
-  hiv_status: { 
+  hiv_status: {
     type: 'boolean',
-    models: ['Patient'], 
+    models: ['Patient'],
     label: 'HIV Status',
     transform: 'Boolean',
   },
@@ -127,11 +259,7 @@ export const schemaHelperMap = {
     models: ['Patient'],
     label: 'HMO Benefactors',
   },
-  hmo_beneficiaries: {
-    type: 'string',
-    models: ['Patient'],
-    label: 'HMO Beneficiaries',
-  },
+
   hmo_expiry_date: {
     type: 'date',
     models: ['Patient'],
@@ -158,20 +286,17 @@ export const schemaHelperMap = {
     models: ['Patient'],
     label: 'Patient HMO Code',
   },
-  "discharge_summary.date_of_admission": {
-    type: 'date',
-    models: ['AdmissionRecord'],
-    label: 'Date of Admission',
-    transform: 'Date'
-  },
-  "discharge_summary.date_of_discharge": {
+
+  'discharge_summary.date_of_discharge': {
     type: 'date',
     models: ['AdmissionRecord'],
     label: 'Date of Discharge',
-    transform: 'Date'
+    transform: 'Date',
   },
-  
+  ...hiddenProps(propsToHide),
 };
+
+console.log(schemaHelperMap);
 
 export interface ISchemaHelperMap {
   api?: string;

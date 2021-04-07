@@ -27,6 +27,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TransformStatsResultPipe } from './pipes/transform-stats-result.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MedicalHistoryComponent,
     ResultTableComponent,
     DynamicStatsComponent,
+    TransformStatsResultPipe,
   ],
   imports: [
     AppRoutingModule,

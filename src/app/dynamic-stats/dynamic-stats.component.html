@@ -13,26 +13,28 @@
                 <mat-form-field class="example-chip-list">
                     <mat-label>Selected Fields</mat-label>
                     <mat-chip-list #chipList aria-label="Path Selection">
-                        <ng-container *ngFor="let pathData of selectedPaths; let i = index">
-                        <mat-chip *ngIf="pathData.hide" [selectable]="selectable" >
+                        
+                        <mat-chip [selectable]="selectable" *ngFor="let pathData of selectedPaths; let i = index">
                             {{pathData.label ? pathData.label : pathData.path}}
                             <mat-icon (click)="removePath(i)">cancel</mat-icon>
                         </mat-chip>
-                        </ng-container>
+                        
                         <input placeholder="Select Filter" [formControl]="selectFieldControl" #filterInput
                             [matAutocomplete]="auto" [matChipInputFor]="chipList">
                     </mat-chip-list>
-                    <mat-autocomplete #auto="matAutocomplete"
+                    <mat-autocomplete  #auto="matAutocomplete"
                         (optionSelected)="selectPath($event?.option?.value, filterInput)">
-                        <mat-option [matTooltip]="pathData.label" *ngFor="let pathData of selectedFieldFilterOptions" [value]="pathData">
+                        <ng-container  *ngFor="let pathData of selectedFieldFilterOptions" >
+                        <mat-option *ngIf="!pathData.hide" [matTooltip]="pathData.label"[value]="pathData">
                             {{pathData.label ? pathData.label : pathData.path}}
                         </mat-option>
+                        </ng-container>
                     </mat-autocomplete>
                 </mat-form-field>
             </div>
             <ng-container *ngFor="let pathData of selectedPaths">
                 <mat-form-field
-                    *ngIf="(pathData.data.instance==='String' || pathData.hide === true|| pathData.path === 'diagnosis') && pathData.data?.enumValues?.length < 1"
+                    *ngIf="(pathData.data.instance==='String' || pathData.path === 'diagnosis') && pathData.data?.enumValues?.length < 1"
                     class="example-form-field">
                     <mat-label>{{pathData.path}}</mat-label>
                     <input matInput type="text" [(ngModel)]="pathData.searchValue">
@@ -106,7 +108,7 @@
             <table *ngIf="!fetchOnlyCount && dService.activeResultType === 'object'">
                 <caption>{{selectedSchema?.modelName}}</caption>
                 <tr>
-                    <th [id]="i" *ngFor="let pathData of selectedPaths; let i = index">{{pathData.path}}</th>
+                    <th [id]="i" *ngFor="let pathData of selectedPaths; let i = index">{{pathData.label ? pathData.label : pathData.path}}</th>
                 </tr>
                 <tr *ngFor="let item of dService.result">
                     <td *ngFor="let pathData of selectedPaths">
@@ -115,8 +117,8 @@
                                 {{diagnosis?.desc}}</span>
                         </ng-container>
                         <span
-                            *ngIf="pathData.data?.instance!=='Date' && pathData.path!=='diagnosis'">{{item[pathData?.path]}}</span>
-                        <span *ngIf="pathData.data?.instance==='Date'">{{item[pathData?.path] | date: medium}}</span>
+                            *ngIf="pathData.data?.instance!=='Date' && pathData.path!=='diagnosis'">{{item | transformStatsResult: pathData.path }}</span>
+                        <span *ngIf="pathData.data?.instance==='Date'">{{item | transformStatsResult: pathData.path | date: "medium"}}</span>
                     </td>
                 </tr>
 
