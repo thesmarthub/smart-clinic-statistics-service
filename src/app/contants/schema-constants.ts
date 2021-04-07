@@ -24,7 +24,7 @@ const propsToHide = [
   'daily_report.entry_by_name',
   'daily_report.date_created',
   'daily_reports',
-  'departments',
+  'department',
   'discharge_options',
   'discharge_summary.clinic_appointment',
   'Date of Admission',
@@ -55,11 +55,41 @@ const propsToHide = [
   'nursing_history.history.feeling_about_self_or_image',
   'nursing_history.history.information',
   'nursing_history.history.nutrition',
-  '	nursing_history.history.other_information',
+  'nursing_history.history.other_information',
   'nursing_history.history.sexuality_or_reproduction',
   'nursing_history.history.sleep_and_rest',
   'nursing_history.history.state_of_health.past',
   'nursing_history.history.values_and_beliefs',
+  'nursing_history.history.state_of_health.present',
+  'observation_chart',
+  'patient',
+  'seizure_chart',
+  'treatment_chart',
+   'status',
+   'vitals',
+   'ward_round.drug_history_allergy',
+   'ward_round.past_medical_history',
+   'ward_round.family_and_social_history',
+   'ward_round.initial_diagnosis',
+   'ward_round.complains',
+   'ward_round.initial_ward_round_notes',
+   'ward_round.follow_up_ward_round_notes',
+   'bed.description',
+   'bed.bed_id',
+   'bed.is_occupied',
+   'clinic',
+   'cost_per_night',
+   'emergency',
+   'instruction',
+   'drugs',
+   '_id',
+   'surgery_type',
+   'slug',
+   'Provisional Diagnosis',
+   'discharge_summary.provisional_diagnosis',
+   '-v'
+   
+
 
 ];
 
@@ -126,6 +156,11 @@ export const schemaHelperMap = {
     type: 'number',
     models: '*',
     label: 'Number of Nights',
+  },
+  ward: {
+    type: 'string',
+    models: '*',
+    label: 'Ward',
   },
 
   appointment_time: {
@@ -194,11 +229,11 @@ export const schemaHelperMap = {
     label: 'Date of Discharge',
   },
 
-  'discharge_summary.provisional_diagnosis': {
-    type: 'string',
-    models: ['AdmissionRecord'],
-    label: 'Provisional Diagnosis',
-  },
+  // 'discharge_summary.provisional_diagnosis': {
+  //   type: 'string',
+  //   models: ['AdmissionRecord'],
+  //   label: 'discharge_summary Provisional Diagnosis',
+  // },
 
   'discharge_summary.staff_name': {
     type: 'string',
@@ -209,6 +244,11 @@ export const schemaHelperMap = {
     type: 'string',
     models: ['AdmissionRecord'],
     label: 'Final Diagnosis',
+  },
+  'provisional_diagnosis': {
+    type: 'string',
+    models: ['AdmissionRecord'],
+    label: 'Provisional Diagnosis',
   },
 
   alt_phone: {
