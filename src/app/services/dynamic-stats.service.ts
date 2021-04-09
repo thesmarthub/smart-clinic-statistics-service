@@ -158,3 +158,9 @@ interface ISchema {
 const urls = {
   findICD: '/find-icd',
 };
+
+export class DateFormatter {
+  static convertDateOfBirth(dob: moment.Moment) {
+    return dob.fromNow(true)
+  }
+}

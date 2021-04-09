@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import * as moment from 'moment';
 
 @Pipe({
   name: 'transformStatsResult'
@@ -21,10 +22,12 @@ export class TransformStatsResultPipe implements PipeTransform {
       }
       result = JSON.parse(JSON.stringify(result[splitTitle]));
     })
-
-
-
     return result;
   }
 
+  // transformAge(value: unknown, arg): unknown {
+  //    moment().diff(value, 'years',false);
+  //    return value
+  // }
+  
 }

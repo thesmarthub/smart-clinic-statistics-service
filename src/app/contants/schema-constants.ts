@@ -190,7 +190,7 @@ export const schemaHelperMap = {
   admission_time: {
     type: 'date',
     models: ['AdmissionRecord'],
-    label: 'Date Admitted',
+    label: 'Date Of Admission',
     transform: 'Date',
   },
   admitted_by: {

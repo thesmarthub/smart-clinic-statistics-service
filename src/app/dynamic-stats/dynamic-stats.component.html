@@ -116,9 +116,11 @@
                             <span *ngFor="let diagnosis of item[pathData?.path]"> * {{diagnosis?.code}} -
                                 {{diagnosis?.desc}}</span>
                         </ng-container>
+                    
                         <span
                             *ngIf="pathData.data?.instance!=='Date' && pathData.path!=='diagnosis'">{{item | transformStatsResult: pathData.path }}</span>
-                        <span *ngIf="pathData.data?.instance==='Date'">{{item | transformStatsResult: pathData.path | date: "medium"}}</span>
+                        <span *ngIf="pathData.data?.instance==='Date' && pathData.path !== 'd_o_b'">{{item | transformStatsResult: pathData.path | date: "medium"}}</span>
+                        <span *ngIf="pathData.path==='d_o_b'">{{item.d_o_b ? age(item.d_o_b):""}}</span>
                     </td>
                 </tr>
 

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { DynamicStatsService } from '../services/dynamic-stats.service';
+import {  DateFormatter } from '../services/dynamic-stats.service';
 
 @Component({
   selector: 'app-dynamic-stats',
@@ -23,6 +25,7 @@ export class DynamicStatsComponent implements OnInit {
   formCtrls: Record<string, FormControl> = {};
 
   ngOnInit(): void {
+    
     this.dService.fetchAllSchemas();
     const sub1 = this.dService.notifier.subscribe((event) => {
       if (event === 'FETCHED SCHEMAS') {
@@ -54,7 +57,7 @@ export class DynamicStatsComponent implements OnInit {
     this.selectedSchema = schema;
     this.selectedPaths = [];
   }
-
+  
   selectPath(pathData, filterInput?) {
     this.selectedPaths.push(pathData);
     filterInput.value = '';
@@ -64,10 +67,18 @@ export class DynamicStatsComponent implements OnInit {
     this.selectedPaths.splice(index, 1);
   }
 
+  
+age(age) {
+    return DateFormatter.convertDateOfBirth(moment(age))
+    
+  }
+
+
   fetchResult() {
     let populateFields = '';
     let selectFields = '';
     let foundDateFilter = false;
+    
     const payload: Record<string, Record<string, any> | ''> = {
       data: {},
       range: {},
@@ -90,12 +101,14 @@ export class DynamicStatsComponent implements OnInit {
           payload.data[pathData.path] = pathData.searchValue;
         }
       }
+      
       if (pathData.startRange) {
         payload.range[pathData.path] = {
           ...payload.range[pathData.path],
           gte: pathData.startRange.toISOString(),
         };
       }
+      
       if (pathData.endRange) {
         payload.range[pathData.path] = {
           ...payload.range[pathData.path],
@@ -135,6 +148,8 @@ export class DynamicStatsComponent implements OnInit {
     );
 
     console.log(payload);
+
+
   }
 
   // formControlGenerator(path) {
