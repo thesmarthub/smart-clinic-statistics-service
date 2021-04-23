@@ -87,12 +87,18 @@ const propsToHide = [
    'Provisional Diagnosis',
    'discharge_summary.provisional_diagnosis',
    '-v',
-   'allergies'
-   
+   'allergies',
+   'ward_beds',
+   'consultation_history.developmental_milestone.gross_motor.adequate',
+   'ward',
+   'clinic',
+   'admitted_by',
+   '__v'
+
 
 
 ];
-  
+
 export const schemaHelperMap = {
   d_o_b: {
     type: 'age',
@@ -147,10 +153,16 @@ export const schemaHelperMap = {
     models: '*',
     label: 'Patient Name',
   },
+
   hospital_number: {
     type: 'string',
     models: '*',
     label: 'Hospital Number',
+  },
+  address: {
+    type: 'string',
+    models: '*',
+    label: 'Address',
   },
   number_of_nights: {
     type: 'number',
@@ -161,6 +173,46 @@ export const schemaHelperMap = {
     type: 'string',
     models: '*',
     label: 'Ward',
+  },
+  ward_name: {
+    type: 'string',
+    models: '*',
+    label: 'Ward Name',
+  },
+  ward_department_route: {
+    type: 'string',
+    models: '*',
+    label: 'ward Department Route',
+  },
+  number_of_beds_in_ward: {
+    type: 'number',
+    models: '*',
+    label: 'Number Of Beds In Ward',
+  },
+  number_of_free_beds_in_ward: {
+    type: 'number',
+    models: '*',
+    label: 'Number Of Free Beds In Ward',
+  },
+  is_ward_icu: {
+    type: 'boolean',
+    models: '*',
+    label: 'Is Ward Icu',
+  },
+  no_of_patients_in_ward: {
+    type: 'number',
+    models: '*',
+    label: 'Number Of Patients In Ward',
+  },
+  ward_capacity: {
+    type: 'number',
+    models: '*',
+    label: 'Ward Capacity',
+  },
+  ward_gender: {
+    type: 'number',
+    models: '*',
+    label: 'Ward Gender',
   },
 
   appointment_time: {
@@ -199,6 +251,32 @@ export const schemaHelperMap = {
     label: 'Admitted By',
   },
 
+  admitted_by_fname : {
+    type: 'string',
+    models: '*',
+    label: 'Admitted By First Name',
+  },
+  admitted_by_lname  : {
+    type: 'string',
+    models: '*',
+    label: 'Admitted By Last Name',
+  },
+  admitted_by_department_route : {
+    type: 'string',
+    models: '*',
+    label: 'Admitted By Department Route',
+  },
+  admitted_by_gender : {
+    type: 'string',
+    models: '*',
+    label: 'Admitted By Gender',
+  },
+  admitted_by_designation : {
+    type: 'string',
+    models: '*',
+    label: 'Admitted By Designation',
+  },
+
   'bed.name': {
     type: 'string',
     models: ['AdmissionRecord'],
@@ -221,6 +299,11 @@ export const schemaHelperMap = {
     type: 'string',
     models: ['AdmissionRecord'],
     label: 'Discharge Method',
+  },
+  'discharge_summary.definitive_diagnosis':{
+    type: 'string',
+    models: '*',
+    label: 'Discharge Summary Definitive Diagnosis',
   },
 
   'Date of Discharge': {
@@ -266,6 +349,12 @@ export const schemaHelperMap = {
   //   models: ['Patient'],
   //   label: 'Antenatal Status',
   // },
+
+  'consultation_history.dental_history' : {
+    type: 'string',
+    models: ['Patient'],
+    label: 'Consultation History Dental History',
+  },
   date_of_evacuation: {
     type: 'date',
     models: ['Patient'],
