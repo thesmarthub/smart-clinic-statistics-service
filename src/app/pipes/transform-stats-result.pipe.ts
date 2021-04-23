@@ -20,6 +20,7 @@ export class TransformStatsResultPipe implements PipeTransform {
         result = value[splitTitle];
         return
       }
+      if(!result) return
       result = JSON.parse(JSON.stringify(result[splitTitle]));
     })
     return result;

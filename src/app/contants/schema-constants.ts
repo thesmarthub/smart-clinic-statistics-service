@@ -24,11 +24,11 @@ const propsToHide = [
   'daily_report.entry_by_name',
   'daily_report.date_created',
   'daily_reports',
-  'department',
+  // 'department',
   'discharge_options',
   'discharge_summary.clinic_appointment',
   'Date of Admission',
-  'discharge_summary.definitive_diagnosis',
+  // 'discharge_summary.definitive_diagnosis',
   'discharge_summary.discharge_medications',
   'discharge_summary.relevant_investigation_results',
   'discharge_summary.status_on_discharge',
@@ -77,7 +77,6 @@ const propsToHide = [
    'bed.description',
    'bed.bed_id',
    'bed.is_occupied',
-   'clinic',
    'cost_per_night',
    'emergency',
    'instruction',
@@ -87,12 +86,13 @@ const propsToHide = [
    'slug',
    'Provisional Diagnosis',
    'discharge_summary.provisional_diagnosis',
-   '-v'
+   '-v',
+   'allergies'
    
 
 
 ];
-
+  
 export const schemaHelperMap = {
   d_o_b: {
     type: 'age',
@@ -150,7 +150,7 @@ export const schemaHelperMap = {
   hospital_number: {
     type: 'string',
     models: '*',
-    label: 'Hospital Name',
+    label: 'Hospital Number',
   },
   number_of_nights: {
     type: 'number',
