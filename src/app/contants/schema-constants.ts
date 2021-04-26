@@ -866,7 +866,7 @@ export const schemaHelperMap = {
   'consultation_history.family_history.family_tree.father.profession': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History Family Tree Father Profession'
+    label: 'Father Profession'
     //label: 'Consultation History Family History Family Tree Father Profession'
 
   },
@@ -902,7 +902,7 @@ export const schemaHelperMap = {
   'consultation_history.bbl.doctor_remarks.impression_on_expectation': {
     type: 'string',
     models: ['Patient'],
-    label: 'Doctor Remarks Impression On Expectation'
+    label: 'Doctor Impression On Expectation'
     //label: 'Consultation History Bbl Doctor Remarks Impression On Expectation'
 
   },
@@ -994,7 +994,7 @@ export const schemaHelperMap = {
   'consultation_history.neonatal_history.pre_natal.antenatal_visits_and_family_attended': {
     type: 'string',
     models: ['Patient'],
-    label: 'Pre Natal, Antenatal Visits And Family Attended'
+    label: 'Antenatal Visits And Family Attended'
     //label: 'Consultation History Neonatal History Pre Natal Antenatal Visits And Family Attended'
   },
   'consultation_history.neonatal_history.pre_natal.antenatal_infections_during_pregnancy.rash': {
