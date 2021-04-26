@@ -1360,7 +1360,6 @@ export const schemaHelperMap = {
     label: 'Date of Discharge',
     transform: 'Date',
   },
-
   title :  {
     type: 'string',
     models: ['Patient'],
