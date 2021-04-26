@@ -65,46 +65,61 @@ const propsToHide = [
   'patient',
   'seizure_chart',
   'treatment_chart',
-   'status',
-   'vitals',
-   'ward_round.drug_history_allergy',
-   'ward_round.past_medical_history',
-   'ward_round.family_and_social_history',
-   'ward_round.initial_diagnosis',
-   'ward_round.complains',
-   'ward_round.initial_ward_round_notes',
-   'ward_round.follow_up_ward_round_notes',
-   'bed.description',
-   'bed.bed_id',
-   'bed.is_occupied',
-   'cost_per_night',
-   'emergency',
-   'instruction',
-   'drugs',
-   '_id',
-   'surgery_type',
-   'slug',
-   'Provisional Diagnosis',
-   'discharge_summary.provisional_diagnosis',
-   '-v',
-   'allergies',
-   'ward_beds',
-   'consultation_history.developmental_milestone.gross_motor.adequate',
-   'ward',
-   'clinic',
-   'admitted_by',
-   '__v',
-   'list_of_appointments',
-    'next_of_kin.occupation',
-    'next_of_kin_address',
-    'next_of_kin_email',
-    'next_of_kin_fname',
-    'next_of_kin_lname',
-    'next_of_kin_phone',
-    'next_of_kin_sex',
-    'next_of_kin_relationship',
-    'retainership',
-    'password',
+  'status',
+  'vitals',
+  'ward_round.drug_history_allergy',
+  'ward_round.past_medical_history',
+  'ward_round.family_and_social_history',
+  'ward_round.initial_diagnosis',
+  'ward_round.complains',
+  'ward_round.initial_ward_round_notes',
+  'ward_round.follow_up_ward_round_notes',
+  'bed.description',
+  'bed.bed_id',
+  'bed.is_occupied',
+  'cost_per_night',
+  'emergency',
+  'instruction',
+  'drugs',
+  '_id',
+  'surgery_type',
+  'slug',
+  'Provisional Diagnosis',
+  'discharge_summary.provisional_diagnosis',
+  '-v',
+  'allergies',
+  'ward_beds',
+  'consultation_history.developmental_milestone.gross_motor.adequate',
+  'ward',
+  'clinic',
+  'admitted_by',
+  '__v',
+  'list_of_appointments',
+  'next_of_kin.occupation',
+  'next_of_kin_address',
+  'next_of_kin_email',
+  'next_of_kin_fname',
+  'next_of_kin_lname',
+  'next_of_kin_phone',
+  'next_of_kin_sex',
+  'next_of_kin_relationship',
+  'retainership',
+  'password',
+  'consultation_history.surgery_history.complications.is_true',
+  'consultation_history.surgery_history.drug_allergies.is_true',
+  'consultation_history.social_history.alcohol.is_true',
+  'consultation_history.social_history.cigarettes.is_true.sticks_per_day',
+  'consultation_history.social_history.cigarettes.is_true.duration',
+  'onsultation_history.family_history.family_tree.mother.achievement',
+  'onsultation_history.family_history.family_tree.father.achievement',
+  'consultation_history.neonatal_history.natal.gestational_age_at_delivery.term_type',
+  'consultation_history.breast.doctor_remarks.impression_on_expectation',
+  'consultation_history.neonatal_history.pre_natal.ingestion_of_herbal_concoctions_during_pregnancy.other_herbal_concoctions',
+  'consultation_history.family_history.does_child_go_to_creche_or_school',
+  'consultation_history.family_history.siblings_age_and_class',
+  'consultation_history.family_history.family_tree.mother.achievement',
+  'consultation_history.family_history.family_tree.father.achievement',
+  'consultation_history.neonatal_history.post_natal.others_in_postnatal'
 
 ];
 
@@ -192,6 +207,26 @@ export const schemaHelperMap = {
     type: 'string',
     models: '*',
     label: 'ward Department Route',
+  },
+  department_name: {
+    type: 'string',
+    models: '*',
+    label: 'Department Name'
+  },
+  department_route: {
+    type: 'string',
+    models: '*',
+    label: 'Department Route'
+  },
+  department_type: {
+    type: 'string',
+    models: '*',
+    label: 'Department Type'
+  },
+  department_appointment_code: {
+    type: 'string',
+    models: '*',
+    label: 'Department Appointment Code'
   },
   number_of_beds_in_ward: {
     type: 'number',
@@ -366,664 +401,806 @@ export const schemaHelperMap = {
   'consultation_history.dental_history' : {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Dental History',
+    //label: 'Consultation History Dental History',
+    label: 'Dental History',
   },
   'consultation_history.developmental_milestone.gross_motor.comment' : {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Developmental Milestone Gross Motor Comment',
+    //label: 'Consultation History Developmental Milestone Gross Motor Comment',
+    label: 'Gross Motor Comment',
+
   },
   'consultation_history.developmental_milestone.fine_motor.adequate' : {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Developmental Milestone Fine Motor Adequate',
+    //label: 'Consultation History Developmental Milestone Fine Motor Adequate',
+    label: 'Fine Motor Adequate',
   },
   'consultation_history.developmental_milestone.fine_motor.comment' : {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Developmental Milestone Fine Motor Comment',
+    //label: 'Consultation History Developmental Milestone Fine Motor Comment',
+    label: 'Fine Motor Comment',
+
   },
   'consultation_history.developmental_milestone.dental.adequate' : {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Developmental Milestone Dental Adequate',
+    //label: 'Consultation History Developmental Milestone Dental Adequate',
+    label: 'Dental Adequate',
+
   },
   'consultation_history.developmental_milestone.dental.comment' : {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Developmental Milestone Dental Comment',
+    //label: 'Consultation History Developmental Milestone Dental Comment',
+    label: 'Dental Comment',
+
   },
   'consultation_history.surgery_history.previous_surgery' : {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Surgery History Previous Surgery',
+    label: 'Previous Surgery',
+   // label: 'Consultation History Surgery History Previous Surgery',
+
   },
 
   'consultation_history.developmental_milestone.language.adequate': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Developmental Milestone Language Adequate'
+   // label: 'Consultation History Developmental Milestone Language Adequate'
+    label: 'Language Adequate'
   },
   'consultation_history.developmental_milestone.language.comment': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Developmental Milestone Language Comment'
+    label: 'Language Comment'
+    //label: 'Consultation History Developmental Milestone Language Comment'
   },
   'consultation_history.surgery_history.complications.any': {
     type: 'boolean',
     models: ['Patient'],
-    label: 'Consultation History Surgery History Complications Any'
+    label: 'Any Surgery Complications '
+    //label: 'Consultation History Surgery History Complications Any'
+
   },
-  'consultation_history.surgery_history.complications.is_true': {
-    type: 'boolean',
-    models: ['Patient'],
-    label: 'Consultation History Surgery History Complications Is True'
-  },
+
   'consultation_history.surgery_history.drugs_history': {
     type: 'boolean',
     models: ['Patient'],
-    label: 'Consultation History Surgery History Drugs History'
+    label: 'Drugs History'
+    //label: 'Consultation History Surgery History Drugs History'
   },
   'consultation_history.surgery_history.drug_allergies.any': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Surgery History Drug Allergies Any'
+    //label: 'Consultation History Surgery History Drug Allergies Any'
+    label: 'Any Drug Allergies'
   },
-  'consultation_history.surgery_history.drug_allergies.is_true': {
-    type: 'boolean',
-    models: ['Patient'],
-    label: ' Consultation History Surgery History Drug Allergies Is True'
-  },
-
-  'consultation_history.surgery_history.other_comments': {
+    'consultation_history.surgery_history.other_comments': {
     type: 'string',
     models: ['Patient'],
-    label:'Consultation History Surgery History Other Comments'
+    label:'Surgery History Other Comments'
+    //label:'Consultation History Surgery History Other Comments'
   },
   'consultation_history.obstetrics_history.menarche': {
     type: 'string',
     models: ['Patient'],
-    label:'Consultation History Obstetrics History Menarche'
+    label:'Menarche History'
+    //label:'Consultation History Obstetrics History Menarche'
   },
   'consultation_history.obstetrics_history.last_menstrual_period.date': {
     type: 'date',
     models: ['Patient'],
-    label:'Consultation History Obstetrics History Last Menstrual Period Date'
+    label:'Last Menstrual Period Date'
+    //label:'Consultation History Obstetrics History Last Menstrual Period Date'
+
   },
   'consultation_history.obstetrics_history.last_menstrual_period.number_of_days': {
     type: 'number',
     models: ['Patient'],
-    label:'Consultation History Obstetrics History Last Menstrual Period Number Of Days'
+    label:'Menstrual Period Number Of Days'
+    //label:'Consultation History Obstetrics History Last Menstrual Period Number Of Days'
+
   },
   'consultation_history.obstetrics_history.last_menstrual_period.regular_flow': {
     type: 'boolean',
     models: ['Patient'],
-    label:'Consultation History Obstetrics History Last Menstrual Period Regular Flow'
+    label:'Menstrual Period Regular Flow'
+    //label:'Consultation History Obstetrics History Last Menstrual Period Regular Flow'
+
   },
   'consultation_history.obstetrics_history.last_menstrual_period.comment': {
     type: 'string',
     models: ['Patient'],
-    label:'Consultation History Obstetrics History Last Menstrual Period Comment'
+    label:'Menstrual Period Comment'
+    //label:'Consultation History Obstetrics History Last Menstrual Period Comment'
+
   },
   'consultation_history.obstetrics_history.contraceptives.was_any_used': {
     type: 'boolean',
     models: ['Patient'],
-    label:'Consultation History Obstetrics History Contraceptives Was Any Used'
+    label:'Contraceptives Used'
+    //label:'Consultation History Obstetrics History Contraceptives Was Any Used'
   },
   'consultation_history.obstetrics_history.contraceptives.type_if_true' : {
     type: 'boolean',
     models: ['Patient'],
-    label:'Consultation History Obstetrics History Contraceptives Type If True'
+    label:' Contraceptives Type If True'
+    //label:'Consultation History Obstetrics History Contraceptives Type If True'
+
   },
   'consultation_history.obstetrics_history.pap_smear.any_been_done' : {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Obstetrics History Pap Smear Any Been Done'
+    //label: 'Consultation History Obstetrics History Pap Smear Any Been Done'
+    label: 'Pap Smear Been Done'
+
   },
   'consultation_history_obstetrics_hstory_pap_smear_last_papsmear_year' : {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Obstetrics History Pap Smear Last Papsmear Year'
+    //label: 'Consultation History Obstetrics History Pap Smear Last Papsmear Year'
+    label: 'Last Pap Smear (Year)'
+
   },
   'consultation_history.obstetrics_history.pap_smear.last_papsmear_findings' : {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Obstetrics History Pap Smear Last Ppapsmear Findings'
+    label: 'Last Pap Smear Findings'
+    //label: 'Consultation History Obstetrics History Pap Smear Last Ppapsmear Findings'
   },
   'consultation_history.obstetrics_history.parity' : {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Obstetrics History Parity'
+    //label: 'Consultation History Obstetrics History Parity'
+    label: 'History Parity'
   },
   'consultation_history.obstetrics_history.pap_smear.last_papsmear_year': {
     type: 'string',
     models: ['Patient'],
     label: 'Consultation History Obstetrics History Pap Smear Last Papsmear Year'
+    //label: 'Consultation History Obstetrics History Pap Smear Last Papsmear Year'
+
   },
   'consultation_history.obstetrics_history.obs_history': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Obstetrics History Obs History'
+    label: 'Obs History'
+    //label: 'Consultation History Obstetrics History Obs History'
   },
   'consultation_history.obstetrics_history.number_of_deliveries': {
-    type: 'string',
+    type: 'number',
     models: ['Patient'],
-    label: 'Consultation History Obstetrics History Number Of Deliveries'
+    //label: 'Consultation History Obstetrics History Number Of Deliveries'
+    label: 'Number Of Deliveries'
+
   },
   'consultation_history.reproduction_history': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Reproduction History'
+    //label: 'Consultation History Reproduction History'
+    label: 'Reproduction History'
+
   },
   'consultation_history.obstetrics_history.mode_of_delivery': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Obstetrics History Mode Of Delivery'
+    //label: 'Consultation History Obstetrics History Mode Of Delivery'
+    label: 'Mode Of Delivery'
+
   },
   'consultation_history.obstetrics_history.history_of_termination_of_children': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Obstetrics History History Of Termination Of Children'
+    label: 'Termination Of Children'
+    //label: 'Consultation History Obstetrics History History Of Termination Of Children'
+
   },
   'consultation_history.obstetrics_history.any_complications': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Obstetrics History Any Complications'
+    label: 'Any Complications'
+    //label: 'Consultation History Obstetrics History Any Complications'
   },
   'consultation_history.obstetrics_history.other_comments': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Obstetrics History Other Comments'
+    //label: 'Consultation History Obstetrics History Other Comments'
+    label: 'Obstetrics History Other Comments'
+
   },
   'consultation_history.medical_history.previous_condition': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Medical History Previous Condition'
+    //label: 'Consultation History Medical History Previous Condition'
+    label: 'Previous Medical Condition'
   },
   'consultation_history.medical_history.previous_blood_transfusion': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Medical History Previous Blood Transfusion'
+    label: 'Previous Blood Transfusion'
+    //label: 'Consultation History Medical History Previous Blood Transfusion'
   },
   'consultation_history.medical_history.any_complications': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Medical History Any Complications'
+    label: 'Any Complications'
+    //label: 'Consultation History Medical History Any Complications'
   },
   'consultation_history.medical_history.other_coments': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Medical History Other Coments'
+    label: 'Other Medical Coments'
+    //label: 'Consultation History Medical History Other Coments'
+
   },
   'consultation_history.nutritional_history.type_of_feeding': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Nutritional History Type Of Feeding'
+    //label: 'Consultation History Nutritional History Type Of Feeding'
+    label: 'Type Of Feeding'
+
   },
   'consultation_history.nutritional_history.method_of_feeding': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Nutritional History Method Of Feeding'
+    label: 'Method Of Feeding'
+    //label: 'Consultation History Nutritional History Method Of Feeding'
   },
   'consultation_history.nutritional_history.weaning_diet': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Nutritional History Weaning Diet'
+    label: 'Weaning Diet'
+    //label: 'Consultation History Nutritional History Weaning Diet'
+
   },
   'consultation_history.nutritional_history.frequency_adequacy_intervals_between_feeds': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Nutritional History Frequency Adequacy Intervals Between Feeds'
+    label: 'Intervals Between Feeds'
+    //label: 'Consultation History Nutritional History Frequency Adequacy Intervals Between Feeds'
+
   },
   'consultation_history.nutritional_history.diet_recall': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Nutritional History Diet Recall'
+    label: 'Diet Recall'
+    //label: 'Consultation History Nutritional History Diet Recall'
+
   },
   'consultation_history.nutritional_history.method_of_preparation': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Nutritional History Method Of Preparation'
+    label: 'Nutritional  Method Of Preparation'
+    //label: 'Consultation History Nutritional History Method Of Preparation'
+
   },
   'consultation_history.immunization_history': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Immunization History'
+    label: 'Immunization History'
+    //label: 'Consultation History Immunization History'
   },
   'consultation_history.social_history.alcohol.drinks_alcohol': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation Sistory Social History Alcohol Drinks Alcohol'
+    label: 'Drinks Alcohol'
+    //label: 'Consultation Sistory Social History Alcohol Drinks Alcohol'
+
   },
-  'consultation_history.social_history.alcohol.is_true': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'consultation History Social History Alcohol Is True'
-  },
+
   'consultation_history.social_history.takes_shisha': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Social History Takes Shisha'
+    label: 'Takes Shisha'
+    // /label: 'Consultation History Social History Takes Shisha'
   },
   'consultation_history.social_history.cigarettes.smokes_cigarette': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Social History Cigarettes Smokes Cigarette'
+    label: 'Smokes Cigarette'
+    //label: 'Consultation History Social History Cigarettes Smokes Cigarette'
   },
-  'consultation_history.social_history.cigarettes.is_true.sticks_per_day': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Consultation History Social History Cigarettes Is True Sticks Per Day'
-  },
-  'consultation_history.social_history.cigarettes.is_true.duration': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Consultation History Social History Cigarettes Is True Duration'
-  },
+
+
   'consultation_history.social_history.hard_drugs': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Social History Hard Drugs'
+    label: 'Hard Drugs'
+    //label: 'Consultation History Social History Hard Drugs'
+
   },
-  'consultation_history.social_history.other_Coments': {
+  /*'consultation_history.social_history.other_Coments': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Social History Other Coments'
+    label: 'Other  Social Coments'
+   // label: 'Consultation History Social History Other Coments'
+
   },
+  **/
   'consultation_history.family_history.hereditory_condition': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History Hereditory Condition'
+    label: 'Family Hereditory Condition'
+    //label: 'Consultation History Family History Hereditory Condition'
   },
   'consultation_history.family_history.relationship_to_client': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History Relationship To Client'
-  },
-  'Consultation History Family History Any Other Information': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'consultation History Social History Alcohol Is True'
+    label: 'Relationship To Client'
+    //label: 'Consultation History Family History Relationship To Client'
   },
   'consultation_history.family_history.history_of_similar_illness_in_siblings': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History History Of Similar Illness In Siblings'
+    label: 'Similar Illness In Siblings'
+    //label: 'Consultation History Family History History Of Similar Illness In Siblings'
+
   },
   'consultation_history.social_history.other_coments	': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Social History Other Coments	'
+    label: 'Social History Other Coments	'
+    //label: 'Consultation History Social History Other Coments	'
   },
   'consultation_history.family_history.any_other_information': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History Any Other Information'
+    label: 'Other Information'
+    //label: 'Consultation History Family History Any Other Information'
   },
   'consultation_history.family_history.patient_position_in_family': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History Patient Position In Family'
+    label: 'Position In Family'
+   // label: 'Consultation History Family History Patient Position In Family'
+
   },
   'consultation_history.family_history.intervention_so_far': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History Intervention So Far'
-  },
-  'consultation_history.family_history.does_child_go_to_creche_or_school': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Consultation History Family History Does Child Go To Creche Or School'
-  },
-  'consultation_history.family_history.siblings_age_and_class': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Consultation History Family Sistory Siblings Age And Class'
+    label: 'Intervention So Far'
+    //label: 'Consultation History Family History Intervention So Far'
+
   },
   'consultation_history.family_history.family_tree.mother.age': {
-    type: 'string',
+    type: 'number',
     models: ['Patient'],
-    label: 'Consultation History Family History Family Tree Mother Age'
+    label: 'Mothers Age'
+    //label: 'Consultation History Family History Family Tree Mother Age'
+
   },
   'consultation_history.family_history.family_tree.mother.blood_group': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History Family Tree Mother Blood Group'
+    label: 'Mother Blood Group'
+    //label: 'Consultation History Family History Family Tree Mother Blood Group'
+
   },
   'consultation_history.family_history.family_tree.mother.genotype': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History Family Tree Mother Genotype'
+    label: 'Mother Genotype'
+    //label: 'Consultation History Family History Family Tree Mother Genotype'
+
   },
   'consultation_history.family_history.family_tree.mother.profession': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History Family Tree Mother Profession'
+    label: 'Mother Profession'
+    //label: 'Consultation History Family History Family Tree Mother Profession'
+
   },
-  'consultation_history.family_history.family_tree.mother.achievement': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Consultation History Family History Family Tree Mother Achievement'
-  },
+
   'consultation_history.social_history.other_coments': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Social History Other Coments'
+    label: 'Other Social History Coments'
+    //label: 'Consultation History Social History Other Coments'
+
   },
   'consultation_history.family_history.family_tree.father.age': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History Family Tree Father Age'
+    label: 'Father Age'
+    //label: 'Consultation History Family History Family Tree Father Age'
+
   },
   'consultation_history.family_history.family_tree.father.blood_group': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History Family Tree Father Blood Group'
+    label: 'Father Blood Group'
+    //label: 'Consultation History Family History Family Tree Father Blood Group'
+
   },
   'consultation_history.family_history.family_tree.father.genotype': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Family History Family Tree Father Genotype'
+    label: 'Father Genotype'
+    //label: 'Consultation History Family History Family Tree Father Genotype'
+
   },
   'consultation_history.psychiatric_history.addictions.has_addictions': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Psychiatric History Addictions Has Addictions'
+    label: ' Has Addictions'
+    //label: 'Consultation History Psychiatric History Addictions Has Addictions'
+
   },
   'consultation_history.psychiatric_history.addictions.addictions_if_true': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Psychiatric History Addictions Addictions If True'
+    label: 'Addictions If True'
+    //label: 'Consultation History Psychiatric History Addictions Addictions If True'
   },
   'consultation_history.psychiatric_history.previous_episode_of_depression': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Psychiatric History Previous Episode Of Depression'
+    label: 'Previous Episode Of Depression'
+    //label: 'Consultation History Psychiatric History Previous Episode Of Depression'
+
   },
   'consultation_history.psychiatric_history.previous_episode_of_elation': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Psychiatric History Previous Episode Of Elation'
+    label: 'Previous Episode Of Elation'
+    //label: 'Consultation History Psychiatric History Previous Episode Of Elation'
+
   },
   'consultation_history.psychiatric_history.surgery.reason': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Psychiatric History Surgery Reason'
+    label: 'Surgery Reason'
+    //label: 'Consultation History Psychiatric History Surgery Reason'
+
   },
   'consultation_history.psychiatric_history.surgery.clarify_if_others': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Psychiatric History Surgery Clarify If Others'
+    label: 'Surgery Clarify If Others'
+   // label: 'Consultation History Psychiatric History Surgery Clarify If Others'
+
   },
   'consultation_history.family_history.family_tree.father.profession': {
     type: 'string',
     models: ['Patient'],
     label: 'Consultation History Family History Family Tree Father Profession'
+    //label: 'Consultation History Family History Family Tree Father Profession'
+
   },
-  'Consultation History Family History Family Tree Father Achievement': {
+  'Consultation_history.family_history.family_tree.father_achievement': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Psychiatric History Surgery Clarify If Others'
+    label: ' Father Achievement'
+    //label: 'Consultation History Family History Family Tree Father Achievement'
+
+
   },
   'consultation_history.bbl.buttocks_size_wanted': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Bbl Buttocks Size Wanted'
+    label: 'Buttocks Size'
+    //label: 'Consultation History Bbl Buttocks Size Wanted'
+
   },
   'consultation_history.bbl.client_expectation': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Bbl Client Expectation'
+    label: 'Client Expectation'
+    //label: 'Consultation History Bbl Client Expectation'
+
   },
   'consultation_history.bbl.doctor_remarks.comment': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Bbl Doctor Remarks Comment'
+    label: 'Bbl Doctor Remarks'
+    //label: 'Consultation History Bbl Doctor Remarks Comment'
+
   },
   'consultation_history.bbl.doctor_remarks.impression_on_expectation': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Bbl Doctor Remarks Impression On Expectation'
+    label: 'Doctor Remarks Impression On Expectation'
+    //label: 'Consultation History Bbl Doctor Remarks Impression On Expectation'
+
   },
   'consultation_history.breast.cup_size_wanted': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Breast Cup Size Wanted'
+    label: 'Breast Cup Size '
+    //label: 'Consultation History Breast Cup Size Wanted'
+
   },
   'consultation_history.breast.client_expectation': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Breast Client Expectation'
-  },
-  'consultation_history.family_history.family_tree.father.achievement': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Consultation History Family History Family Tree Father Achievement'
+    label: 'Breast Client Expectation'
+    //label: 'Consultation History Breast Client Expectation'
+
   },
   'consultation_history.breast.doctor_remarks.comment': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Breast Doctor Remarks Comment'
+    label: 'Breast Doctor Comment'
+    //label: 'Consultation History Breast Doctor Remarks Comment'
+
   },
-  'consultation_history.breast.doctor_remarks.impression_on_expectation': {
+  /*'consultation_history.breast.doctor_remarks.impression_on_expectation': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Breast Doctor Remarks Impression On Expectation'
+    label: 'Brest Doctor Remarks On Expectation'
+    //label: 'Consultation History Breast Doctor Remarks Impression On Expectation'
   },
+  **/
   'consultation_history.special_precaution.comorbidity': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Special Precaution Comorbidity'
+    label: 'Special Precaution Comorbidity'
+    //label: 'Consultation History Special Precaution Comorbidity'
   },
   'consultation_history.special_precaution.has_drug_allergies': {
     type: 'boolean',
     models: ['Patient'],
-    label: 'Consultation History Special Precaution Has Drug Allergies'
+    label: 'Drug Allergies'
+    //label: 'Consultation History Special Precaution Has Drug Allergies'
   },
   'consultation_history.special_precaution.drug_allergies': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Special Precaution Drug Allergies'
+    label: 'Drug Allergies If Any'
+    //label: 'Consultation History Special Precaution Drug Allergies'
+
   },
   'consultation_history.special_precaution.has_other_allergies': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Special Precaution Has Other Allergies'
+    label: 'Other Allergies'
+    //label: 'Consultation History Special Precaution Has Other Allergies'
+
   },
   'consultation_history_special_precaution_special_notes': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Special Precaution Special Notes'
+    label: 'Special Notes'
+    //label: 'Consultation History Special Precaution Special Notes'
+
   },
   'consultation_history.neonatal_history.pre_natal.age_and_parity_of_mother': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Pre Natal Age And Parity Of Mother'
+    label: 'Pre Natal Age And Parity Of Mother'
+    //label: 'Consultation History Neonatal History Pre Natal Age And Parity Of Mother'
   },
   'consultation_history.neonatal_history.pre_natal.ipt': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Pre Natal Ipt'
+    label: 'Pre Natal Ipt'
+    //label: 'Consultation History Neonatal History Pre Natal Ipt'
   },
   'consultation_history.special_precaution.other_allergies': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Special Precaution Other Allergies'
+    label: 'Precaution And Other Allergies'
+    //label: 'Consultation History Special Precaution Other Allergies'
   },
   'consultation_history.special_precaution.special_notes': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Special Precaution Special Notes'
+    label: 'Special Precaution Notes'
+    //label: 'Consultation History Special Precaution Special Notes'
   },
   'consultation_history.neonatal_history.pre_natal.antenatal_visits_and_family_attended': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Pre Natal Antenatal Visits And Family Attended'
+    label: 'Pre Natal, Antenatal Visits And Family Attended'
+    //label: 'Consultation History Neonatal History Pre Natal Antenatal Visits And Family Attended'
   },
   'consultation_history.neonatal_history.pre_natal.antenatal_infections_during_pregnancy.rash': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Pre Natal Antenatal Infections During Pregnancy Rash'
+    label: 'Pregnancy Rash'
+    //label: 'Consultation History Neonatal History Pre Natal Antenatal Infections During Pregnancy Rash'
+
   },
   'consultation_history.neonatal_history.pre_natal.antenatal_infections_during_pregnancy.other_antenatal_infections': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Pre Natal Antenatal Infections During Pregnancy Other Antenatal Infections'
+    label: 'Other Antenatal Infections'
+    //label: 'Consultation History Neonatal History Pre Natal Antenatal Infections During Pregnancy Other Antenatal Infections'
+
   },
   'consultation_history.neonatal_history.pre_natal.ingestion_of_herbal_concoctions_during_pregnancy.alcohol': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Pre Natal Ingestion Of Herbal Concoctions During Pregnancy Alcohol'
+    label: 'Ingestion  Of Alcohol Or Herbal Concoctions During Pregnancy'
+    //label: 'Consultation History Neonatal History Pre Natal Ingestion Of Herbal Concoctions During Pregnancy Alcohol'
+
   },
   'consultation_history.neonatal_history.natal.how_soon_after_birth_was_the_child_put_to_breast': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal How Soon After Birth Was The Child Put To Breast'
+    label: 'How Soon After Birth Was The Child Put To Breast'
+    //label: 'Consultation History Neonatal History Natal How Soon After Birth Was The Child Put To Breast'
+
   },
-  'consultation_history.neonatal_history.natal.gestational_age_at_delivery.term_type': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal Gestational Age At Delivery Term Type'
-  },
+
   'consultation_history.neonatal_history.pre_natal.ingestion_of_herbal_concoctions_during_pregnancy.cigarrete_smooking': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Pre Natal Ingestion Of Herbal Concoctions During Pregnancy Cigarrete smooking'
-  },
-  'consultation_history.neonatal_history.pre_natal.ingestion_of_herbal_concoctions_during_pregnancy.other_herbal_concoctions': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Consultation History Neonatal History Pre Natal Ingestion Of herbal Concoctions During Pregnancy Other Herbal Concoctions'
+    label: 'Ingestion Of Herbal Concoctions And  Cigarrete smooking During Pregnancy'
+    //label: 'Consultation History Neonatal History Pre Natal Ingestion Of Herbal Concoctions During Pregnancy Cigarrete smooking'
   },
   'consultation_history.neonatal_history.pre_natal.routine_immunization_given': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Pre Natal Routine Immunization Given'
+    label: 'Immunization Given'
+    //label: 'Consultation History Neonatal History Pre Natal Routine Immunization Given'
   },
   'consultation_history.neonatal_history.pre_natal.list_of_immunization_given': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Pre Natal List Of Immunization Given'
+    label: 'List Of Immunization Given'
+    //label: 'Consultation History Neonatal History Pre Natal List Of Immunization Given'
   },
   'consultation_history.neonatal_history.pre_natal.antenatal_infections_during_pregnancy.fever': {
     type: 'boolean',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Pre Natal Antenatal Infections During Pregnancy Fever'
+    label: 'Pregnancy Fever'
+    //label: 'Consultation History Neonatal History Pre Natal Antenatal Infections During Pregnancy Fever'
+
   },
   'consultation_history.neonatal_history.natal.gestational_age_at_delivery.no_of_weeks': {
     type: 'number',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal Gestational Age At Delivery Number Of Weeks'
+    label: 'Gestational Age (Number Of Weeks)'
+    //label: 'Consultation History Neonatal History Natal Gestational Age At Delivery Number Of Weeks'
+
   },
   'consultation_history.neonatal_history.natal.state_of_child_at_delivery.reflex_irritability.one_min': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal State Of Child At Delivery Reflex Irritability One Min'
+    label: 'Child Reflex Irritability (One Min)'
+    //label: 'Consultation History Neonatal History Natal State Of Child At Delivery Reflex Irritability One Min'
+
   },
   'consultation_history.neonatal_history.natal.birth_weight': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal Birth Weight'
+    label: 'Birth Weight'
+    //label: 'Consultation History Neonatal History Natal Birth Weight'
+
   },
   'consultation_history.neonatal_history.natal.mode_of_delivery': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal Mode Of Delivery'
+    label: 'Mode Of Delivery'
+    //label: 'Consultation History Neonatal History Natal Mode Of Delivery'
+
+
   },
   'consultation_history.neonatal_history.natal.state_of_child_at_delivery.heart_rate.five_min': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal State Of Child At Delivery Heart Rate Five Min'
+    label: 'Child Heart Rate (Five Min)'
+    //label: 'Consultation History Neonatal History Natal State Of Child At Delivery Heart Rate Five Min'
+
   },
   'consultation_history.neonatal_history.post_natal.fever': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Post Natal Fever'
+    label: 'Post Natal Fever'
+    //label: 'Consultation History Neonatal History Post Natal Fever'
   },
   'consultation_history.neonatal_history.natal.state_of_child_at_delivery.respiratory_effort.one_min': {
     type: 'number',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal State Of Child At Delivery Respiratory Effort One min'
+    label: 'State Respiratory Effort (One min)'
+    //label: 'Consultation History Neonatal History Natal State Of Child At Delivery Respiratory Effort One min'
+
   },
   'consultation_history.neonatal_history.natal.duration_of_rupture_of_memberane_to_delivery': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal Duration Of Rupture Of Memberane To Delivery'
+    label: 'Duration Of Rupture Of Memberane'
+    //label: 'Consultation History Neonatal History Natal Duration Of Rupture Of Memberane To Delivery'
+
   },
   'consultation_history.neonatal_history.natal.duration_of_labour': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal Duration Of Labour'
+    label: 'Duration Of Labour'
+    //label: 'Consultation History Neonatal History Natal Duration Of Labour'
+
   },
   'consultation_history.neonatal_history.natal.duration_of_hospital_stay_before_discharge': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal Duration Of Hospital Stay Before Discharge'
+    label: 'Duration Of Hospital Stay Before Discharge'
+    //label: 'Consultation History Neonatal History Natal Duration Of Hospital Stay Before Discharge'
+
   },
   'consultation_history.neonatal_history.natal.state_of_child_at_delivery.heart_rate.one_min': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal State Of Child At Delivery Heart Rate One Min'
+    label: 'Child Heart Rate (One Min)'
+    //label: 'Consultation History Neonatal History Natal State Of Child At Delivery Heart Rate One Min'
+
   },
   'consultation_history.neonatal_history.natal.state_of_child_at_delivery.respiratory_effort.five_min': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal State Of Child At Delivery Respiratory Effort Five min'
+    label: 'Child Respiratory Effort (Five min)'
+    //label: 'Consultation History Neonatal History Natal State Of Child At Delivery Respiratory Effort Five min'
   },
   'consultation_history.neonatal_history.natal.state_of_child_at_delivery.muscle_tone.one_min': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal State Of Child At Delivery Muscle Tone One Min'
+    label: 'Child Muscle Tone (One Min)'
+    //label: 'Consultation History Neonatal History Natal State Of Child At Delivery Muscle Tone One Min'
   },
   'consultation_history.neonatal_history.natal.state_of_child_at_delivery.muscle_tone.five_min': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal State Of Child At Delivery Muscle Tone Five Min'
+    label: 'Child Muscle Tone (Five Min)'
+    //label: 'Consultation History Neonatal History Natal State Of Child At Delivery Muscle Tone Five Min'
+
   },
   'consultation_history.neonatal_history.natal.state_of_child_at_delivery.reflex_irritability.five_min': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal State Of Child At Delivery Reflex Irritability Five Min'
+    label: 'Child Reflex Irritability (Five Min)'
+    //label: 'Consultation History Neonatal History Natal State Of Child At Delivery Reflex Irritability Five Min'
+
   },
   'consultation_history.neonatal_history.natal.state_of_child_at_delivery.color.one_min': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal State Of Child At Delivery Color One Min'
+    label: 'Child Color (One Min)'
+    //label: 'Consultation History Neonatal History Natal State Of Child At Delivery Color One Min'
+
   },
   'consultation_history.neonatal_history.post_natal.neonatal_jaundice': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Post Natal Neonatal Jaundice'
+    label: 'Neonatal Jaundice'
+    //label: 'Consultation History Neonatal History Post Natal Neonatal Jaundice'
+
   },
   'consultation_history.neonatal_history.natal.state_of_child_at_delivery.color.five_min': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Natal State Of Child At Delivery Color Five Min'
+    label: 'Child Color (Five Min)'
+    //label: 'Consultation History Neonatal History Natal State Of Child At Delivery Color Five Min'
+
   },
   'consultation_history.neonatal_history.natal.state_of_child_at_delivery.total_score.one_min': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation history Neonatal History Natal State Of Child At Delivery Total Score One Min'
-  },
-  'consultation_history.neonatal_history.post_natal.others_in_postnatal': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Consultation History Neonatal History Post Natal Others In Postnatal'
+    label: 'Child Total Score (One Min)'
+    //label: 'Consultation history Neonatal History Natal State Of Child At Delivery Total Score One Min'
+
   },
   'consultation_history.neonatal_history.post_natal.sepsis': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Post Natal Sepsis'
+    label: 'Post Natal Sepsis'
+    //label: 'Consultation History Neonatal History Post Natal Sepsis'
+
   },
   'consultation_history.neonatal_history.natal.state_of_child_at_delivery.total_score.five_min': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History natal State of Child At Delivery Total Score Five Min'
+    label: 'Child Total Score (Five Min)'
+    //label: 'Consultation History Neonatal History natal State of Child At Delivery Total Score Five Min'
+
   },
   'consultation_history.neonatal_history.post_natal.convulsion': {
     type: 'string',
     models: ['Patient'],
-    label: 'Consultation History Neonatal History Post Natal Convulsion'
+    label: 'Post Natal Convulsion'
+    //label: 'Consultation History Neonatal History Post Natal Convulsion'
   },
   'last_appointment': {
     type: 'string',
