@@ -119,7 +119,14 @@ const propsToHide = [
   'consultation_history.family_history.siblings_age_and_class',
   'consultation_history.family_history.family_tree.mother.achievement',
   'consultation_history.family_history.family_tree.father.achievement',
-  'consultation_history.neonatal_history.post_natal.others_in_postnatal'
+  'consultation_history.neonatal_history.post_natal.others_in_postnatal',
+  'consultation_history_obstetrics_hstory_pap_smear_last_papsmear_year',
+  'consultation_history.obstetrics_history.pap_smear.any_been_done',
+  'consultation_history.family_history.family_tree.father.profession',
+  'consultation_history.family_history.family_tree.father_achievement',
+  'consultation_history.family_history.family_tree.mother.profession',
+  'consultation_history.family_history.family_tree.father.age',
+  'consultation_history.family_history.family_tree.mother.age',
 
 ];
 
@@ -538,13 +545,7 @@ export const schemaHelperMap = {
     label: 'Pap Smear Been Done'
 
   },
-  'consultation_history_obstetrics_hstory_pap_smear_last_papsmear_year' : {
-    type: 'string',
-    models: ['Patient'],
-    //label: 'Consultation History Obstetrics History Pap Smear Last Papsmear Year'
-    label: 'Last Pap Smear (Year)'
 
-  },
   'consultation_history.obstetrics_history.pap_smear.last_papsmear_findings' : {
     type: 'string',
     models: ['Patient'],
@@ -557,13 +558,7 @@ export const schemaHelperMap = {
     //label: 'Consultation History Obstetrics History Parity'
     label: 'History Parity'
   },
-  'consultation_history.obstetrics_history.pap_smear.last_papsmear_year': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Consultation History Obstetrics History Pap Smear Last Papsmear Year'
-    //label: 'Consultation History Obstetrics History Pap Smear Last Papsmear Year'
 
-  },
   'consultation_history.obstetrics_history.obs_history': {
     type: 'string',
     models: ['Patient'],
@@ -765,13 +760,6 @@ export const schemaHelperMap = {
     //label: 'Consultation History Family History Intervention So Far'
 
   },
-  'consultation_history.family_history.family_tree.mother.age': {
-    type: 'number',
-    models: ['Patient'],
-    label: 'Mothers Age'
-    //label: 'Consultation History Family History Family Tree Mother Age'
-
-  },
   'consultation_history.family_history.family_tree.mother.blood_group': {
     type: 'string',
     models: ['Patient'],
@@ -786,28 +774,16 @@ export const schemaHelperMap = {
     //label: 'Consultation History Family History Family Tree Mother Genotype'
 
   },
-  'consultation_history.family_history.family_tree.mother.profession': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Mother Profession'
-    //label: 'Consultation History Family History Family Tree Mother Profession'
 
-  },
 
   'consultation_history.social_history.other_coments': {
     type: 'string',
     models: ['Patient'],
-    label: 'Other Social History Coments'
+    label: 'Other Social Coments'
     //label: 'Consultation History Social History Other Coments'
 
   },
-  'consultation_history.family_history.family_tree.father.age': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Father Age'
-    //label: 'Consultation History Family History Family Tree Father Age'
 
-  },
   'consultation_history.family_history.family_tree.father.blood_group': {
     type: 'string',
     models: ['Patient'],
@@ -863,21 +839,8 @@ export const schemaHelperMap = {
    // label: 'Consultation History Psychiatric History Surgery Clarify If Others'
 
   },
-  'consultation_history.family_history.family_tree.father.profession': {
-    type: 'string',
-    models: ['Patient'],
-    label: 'Father Profession'
-    //label: 'Consultation History Family History Family Tree Father Profession'
-
-  },
-  'Consultation_history.family_history.family_tree.father_achievement': {
-    type: 'string',
-    models: ['Patient'],
-    label: ' Father Achievement'
-    //label: 'Consultation History Family History Family Tree Father Achievement'
 
 
-  },
   'consultation_history.bbl.buttocks_size_wanted': {
     type: 'string',
     models: ['Patient'],
